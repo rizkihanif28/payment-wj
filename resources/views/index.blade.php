@@ -10,6 +10,6 @@
             ab error dignissimos similique cumque architecto! Sit animi quis ipsa vero accusamus excepturi voluptates ipsam
             hic labore error sapiente maxime, cupiditate quaerat suscipit? Quas, hic a, earum, harum blanditiis amet dicta
             quaerat quibusdam natus ut odio tempora sunt excepturi alias reiciendis eligendi cum eius. Exercitationem soluta
-            ducimus magnam non earum ut enim sit. Consectetur, ad? Mollitia, tempora?</p>
+            ducimus magnam non earum ut enim sit. Consectetur, ad? Mollitia, tempora</p>
     </div>
 @endsection
