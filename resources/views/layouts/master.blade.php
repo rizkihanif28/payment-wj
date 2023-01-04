@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title') | {{ config('app.name') }}</title>
 
     <!-- General CSS Files -->
@@ -16,28 +17,27 @@
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/components.css">
+    {{-- <link rel="stylesheet" href="../assets/css/components.css"> --}}
 </head>
 
 <body>
     <div id="app">
         <div class="main-wrapper">
             <div class="navbar-bg"></div>
+            {{-- Header --}}
             @include('layouts.header')
+            {{-- Sidebar --}}
             @include('layouts.sidebar')
 
             <!-- Main Content -->
             <div class="main-content">
-                <section class="section">
-                    <div class="section-header">
-                        <h1>DASHBOARD</h1>
-                    </div>
-
+                <section class="content-section">
+                    {{-- Main Content --}}
                     @yield('content')
                 </section>
             </div>
         </div>
-        <footer class="main-footer">
+        {{-- <footer class="main-footer">
             <div class="footer-left">
                 Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="https://nauval.in/">Muhamad
                     Nauval Azhar</a>
@@ -45,8 +45,7 @@
             <div class="footer-right">
                 2.3.0
             </div>
-        </footer>
-    </div>
+        </footer> --}}
     </div>
 
     <!-- General JS Scripts -->
