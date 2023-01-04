@@ -64,6 +64,10 @@
     outline: none;
 }
 
+/* #login {
+    background: rgb(245, 245, 245);
+} */
+
 a {
     color: #6777ef;
     font-weight: 500;
@@ -2704,6 +2708,7 @@ body {
     font-weight: 200;
     font-family: "Poppins", sans-serif;
     color: #000000;
+    background: rgb(252, 252, 252);
 }
 
 a.bb {
