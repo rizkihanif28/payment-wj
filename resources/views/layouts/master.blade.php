@@ -18,6 +18,7 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/components.css">
+    @stack('css')
 </head>
 
 <body>
@@ -67,6 +68,13 @@
     <script src="../assets/js/scripts.js"></script>
     <script src="../assets/js/custom.js"></script>
 
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
     <!-- Page Specific JS File -->
     @stack('customJS')
 </body>

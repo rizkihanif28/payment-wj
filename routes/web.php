@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\SiswaController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,8 +20,25 @@ Route::get('/', function () {
     return view('auth/login');
 });
 
-Route::get('/dashboard', function () {
-    return view('admin/dashboard');
-})->middleware(['auth'])->name('dashboard');
+// Route::middleware(['auth', 'role:admin|petugas'])->get('dashboard', [DashboardController::class, 'index'])
+//     ->name('dashboard');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('siswa', [SiswaController::class, 'index'])->name('siswa');
+    Route::get('user', [UserController::class, 'index'])->name('user');
+});
+
+// Route::prefix('admin')
+//     ->middleware(['auth'])
+//     ->group(function () {
+//         Route::middleware(['role:admin'])->group(function () {
+//             Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+//             Route::resource('user', 'UserController');
+//         });
+//         Route::middleware(['role:admin|petugas'])->group(function () {
+//             Route::resource('siswa', 'SiswaController');
+//         });
+//     });
 
 require __DIR__ . '/auth.php';

@@ -8,14 +8,14 @@
         </div>
         <ul class="sidebar-menu">
 
-            <li><a class="nav-link" href="/"><i class="fas fa-home"></i>
+            <li><a class="nav-link" href="/dashboard"><i class="fas fa-home"></i>
                     <span>Dashboard</span></a>
             </li>
 
             {{-- Start Manajemen Data --}}
             <li class="menu-header">Manajemen Data</li>
             <li class="nav-item dropdown">
-                <a href="#" class="nav-link"><i class="fas fa-th-large"></i>
+                <a href="{{ route('siswa') }}" class="nav-link"><i class="fas fa-th-large"></i>
                     <span>Siswa</span></a>
             </li>
             <li class="nav-item dropdown">
@@ -31,7 +31,7 @@
                     <span>Admin</span></a>
             </li>
             <li class="nav-item dropdown">
-                <a href="#" class="nav-link"><i class="fas fa-plug"></i>
+                <a href="{{ route('user') }}" class="nav-link"><i class="fas fa-plug"></i>
                     <span>User</span></a>
             </li>
             <li class="nav-item dropdown">
