@@ -22,9 +22,16 @@
                     <i class="fas fa-cog"></i> Settings
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item has-icon text-danger">
+                {{-- <a href="{{ route('logout') }}" class="dropdown-item has-icon text-danger">
                     <i class="fas fa-sign-out-alt"></i> Logout
-                </a>
+                </a> --}}
+                <form method="POST" action="{{ route('logout') }}">
+                    {{-- <button type="button" class="btn btn-default mr-2" data-dismiss="modal">Close</button> --}}
+                    @csrf
+                    <button type="submit" class="dropdown-item text-danger" style="font-size: 15px"><i
+                            class="fas fa-sign-out-alt mr-2"></i>Logout</button>
+                </form>
+
             </div>
         </li>
     </ul>

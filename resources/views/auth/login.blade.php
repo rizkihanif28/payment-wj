@@ -18,7 +18,7 @@
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="../assets/css/style.css">
-    {{-- <link rel="stylesheet" href="../assets/css/components.css"> --}}
+    <link rel="stylesheet" href="../assets/css/components.css">
 </head>
 
 <body>
@@ -39,20 +39,20 @@
                             </div>
 
                             <div class="card-body">
-                                {{-- @error('username')
+                                @error('username')
                                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                         {{ $message }}
                                         <button type="button" class="close" data-dismissible="alert" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                @enderror --}}
+                                @enderror
                                 <form method="POST" action="{{ route('login') }}">
                                     @csrf
                                     <div class="form-group">
-                                        <label for="username">Username</label>
-                                        <input id="username" type="username" value="{{ @old('username') }}"
-                                            class="form-control" name="username" required autofocus>
+                                        <label for="login">Email / Username</label>
+                                        <input id="login" type="text" value="" class="form-control"
+                                            name="login" required autofocus>
                                     </div>
 
                                     <div class="form-group">
@@ -68,13 +68,13 @@
                                             required>
                                     </div>
 
-                                    {{-- <div class="form-group">
+                                    <div class="form-group">
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" name="remember" class="custom-control-input"
                                                 tabindex="3" id="remember-me">
                                             <label class="custom-control-label" for="remember-me">Remember Me</label>
                                         </div>
-                                    </div> --}}
+                                    </div>
 
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary btn-lg btn-block" value="Login">
@@ -113,6 +113,11 @@
 <!-- JS Libraies -->
 
 <!-- Template JS File -->
+<script src="../assets/js/scripts.js"></script>
+<script src="../assets/js/custom.js"></script>
+
+</html>
+File -->
 <script src="../assets/js/scripts.js"></script>
 <script src="../assets/js/custom.js"></script>
 

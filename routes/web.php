@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\DashboardController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,15 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 Route::get('/', function () {
-    return view('auth.login');
-})->name('login');
+    return view('auth/login');
+});
 
-Route::prefix('admin')
-    ->middleware(['auth'])
-    ->group(function () {
-        Route::middleware(['role:admin'])->group(function () {
-            Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-        });
-    });
+Route::get('/dashboard', function () {
+    return view('admin/dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__ . '/auth.php';
