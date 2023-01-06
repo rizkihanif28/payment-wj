@@ -47,6 +47,14 @@
                                         </button>
                                     </div>
                                 @enderror
+                                @error('email')
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        {{ $message }}
+                                        <button type="button" class="close" data-dismissible="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                @enderror
                                 <form method="POST" action="{{ route('login') }}">
                                     @csrf
                                     <div class="form-group">

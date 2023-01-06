@@ -64,9 +64,10 @@
     outline: none;
 }
 
-/* #login {
-    background: rgb(245, 245, 245);
-} */
+/* Alert Custom CSS */
+.alert-dismissible .close {
+    padding: 0.75rem 0.25rem;
+}
 
 a {
     color: #6777ef;
@@ -2668,6 +2669,10 @@ ul.nav-tabs li.nav-item a.nav-link.active i {
     color: #191d21;
 }
 
+.sidebar-menu li a.active {
+    background-color: #f0f6fa;
+}
+
 /* 3.21 Progress Bar */
 .progress-bar {
     background-color: #6777ef;
@@ -3894,7 +3899,7 @@ body.layout-3 .main-footer {
     width: 100%;
 }
 .main-sidebar .sidebar-menu li a:hover {
-    background-color: #f8fafb;
+    background-color: #f0f6fa;
 }
 .main-sidebar .sidebar-menu li.active a {
     color: #6777ef;

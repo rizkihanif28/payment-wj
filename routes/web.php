@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SiswaController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,14 +21,25 @@ Route::get('/', function () {
     return view('auth/login');
 });
 
-// Route::middleware(['auth', 'role:admin|petugas'])->get('dashboard', [DashboardController::class, 'index'])
-//     ->name('dashboard');
-
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('home', [HomeController::class, 'index'])->name('home');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    // Admin
     Route::get('siswa', [SiswaController::class, 'index'])->name('siswa');
     Route::get('user', [UserController::class, 'index'])->name('user');
+    // Petugas
+
+    // Siswa
 });
+
+// Route::middleware(['auth', 'role:admin'])->group(function () {
+//     Route::get('siswa', [SiswaController::class, 'index'])->name('siswa');
+//     Route::get('user', [UserController::class, 'index'])->name('user');
+// });
+
+// Route::middleware(['auth', 'role:admin|petugas'])->group(function () {
+//     Route::get('siswa', [SiswaController::class, 'index'])->name('siswa');
+// });
 
 // Route::prefix('admin')
 //     ->middleware(['auth'])
