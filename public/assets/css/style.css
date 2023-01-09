@@ -1296,6 +1296,10 @@ table tr:hover .table-links {
     opacity: 1;
 }
 
+.table-striped tbody tr {
+    font-weight: 300;
+}
+
 .table-striped tbody tr:nth-of-type(odd) {
     background-color: rgba(0, 0, 0, 0.02);
 }
@@ -1722,7 +1726,7 @@ h6 .badge {
 
 .btn-danger,
 .btn-danger.disabled {
-    box-shadow: 0 2px 6px #fd9b96;
+    /* box-shadow: 0 2px 6px #fd9b96; */
     background-color: #fc544b;
     border-color: #fc544b;
     color: #fff;
@@ -1858,7 +1862,7 @@ h6 .badge {
 
 .btn-primary,
 .btn-primary.disabled {
-    box-shadow: 0 2px 6px #acb5f6;
+    /* box-shadow: 0 2px 6px #acb5f6; */
     background-color: #6777ef;
     border-color: #6777ef;
 }

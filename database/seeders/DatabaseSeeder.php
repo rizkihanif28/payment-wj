@@ -252,5 +252,25 @@ class DatabaseSeeder extends Seeder
             'alamat' => 'Jl. Walang Jaya 11',
             'telepon' => '089626456196'
         ]);
+
+        $user5 = User::create([
+            'username' => 'zizah79',
+            'email' => 'zizah@gmail.com',
+            'password' => Hash::make('zizah79')
+        ]);
+        $user5->assignRole('siswa');
+
+        Siswa::create([
+            'user_id' => $user5->id,
+            'kelas_id' => $kelas3->id,
+            'kode_siswa' => 'SSW' . Str::upper(Str::random(5)),
+            'nisn' => '09080703',
+            'nis' => '20201113',
+            'nama_siswa' => 'Nurul Azizah',
+            'jenis_kelamin' => 'Perempuan',
+            'email' => 'zizah79@gmail.com',
+            'alamat' => 'Jl. Walang Jaya 9',
+            'telepon' => '089626456196'
+        ]);
     }
 }

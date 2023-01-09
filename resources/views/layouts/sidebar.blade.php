@@ -14,9 +14,8 @@
             </li>
             <hr>
             @role('admin')
-                <li><a href="{{ route('home') }}" class="nav-link {{ Request::segment(1) == 'home' ? 'active' : '' }}"><i
-                            class="fas fa-home"></i>
-                        <span>Home</span></a>
+                <li><a href="{{ route('home') }}" class="nav-link {{ Request::segment(1) == 'home' ? 'active' : '' }}">
+                        <i class="fas fa-home"></i> <span>Home</span></a>
                 </li>
                 <li><a class="nav-link {{ Request::segment(1) == 'dashboard' ? 'active' : '' }}"
                         href="{{ route('dashboard') }}"><i class="fas fa-home"></i>
@@ -26,9 +25,8 @@
             @endrole
 
             @role('petugas|siswa')
-                <li><a href="{{ route('home') }}" class="nav-link {{ Request::segment(1) == 'home' ? 'active' : '' }}"><i
-                            class="fas fa-home"></i>
-                        <span>Home</span></a>
+                <li><a href="{{ route('home') }}" class="nav-link {{ Request::segment(1) == 'home' ? 'active' : '' }}">
+                        <i class="fas fa-home"></i> <span>Home</span></a>
                 </li>
                 <hr>
             @endrole
@@ -41,16 +39,16 @@
                         <span>Pembayaran</span></a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a href="{{ route('siswa') }}" class="nav-link"><i class="fas fa-th-large"></i>
-                        <span>Siswa</span></a>
+                    <a href="{{ route('siswa') }}" class="nav-link {{ Request::segment(1) == 'siswa' ? 'active' : '' }}">
+                        <i class="fas fa-th-large"></i> <span>Siswa</span></a>
                 </li>
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link"><i class="fas fa-map-marker-alt"></i>
                         <span>Kelas</span></a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a href="{{ route('user') }}" class="nav-link"><i class="fas fa-plug"></i>
-                        <span>User</span></a>
+                    <a href="{{ route('user') }}" class="nav-link {{ Request::segment(1) == 'user' ? 'active' : '' }}">
+                        <i class="fas fa-plug"></i> <span>User</span></a>
                 </li>
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link"><i class="fas fa-plug"></i>

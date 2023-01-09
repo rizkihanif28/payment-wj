@@ -24,22 +24,15 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('home', [HomeController::class, 'index'])->name('home');
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    // Admin
+
+    // Route Admin
     Route::get('siswa', [SiswaController::class, 'index'])->name('siswa');
     Route::get('user', [UserController::class, 'index'])->name('user');
-    // Petugas
+    // Route Petugas
 
-    // Siswa
+    // Route Siswa
+
 });
-
-// Route::middleware(['auth', 'role:admin'])->group(function () {
-//     Route::get('siswa', [SiswaController::class, 'index'])->name('siswa');
-//     Route::get('user', [UserController::class, 'index'])->name('user');
-// });
-
-// Route::middleware(['auth', 'role:admin|petugas'])->group(function () {
-//     Route::get('siswa', [SiswaController::class, 'index'])->name('siswa');
-// });
 
 // Route::prefix('admin')
 //     ->middleware(['auth'])

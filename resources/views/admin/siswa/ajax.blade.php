@@ -5,7 +5,7 @@
             processing: true,
             serverSide: true,
             "responsive": true,
-            ajax: "{{ route('siswa.index') }}",
+            ajax: "{{ route('siswa') }}",
             columns: [{
                     data: 'DT_RowIndex',
                     name: 'id'
@@ -27,8 +27,8 @@
                     name: 'jenis_kelamin'
                 },
                 {
-                    data: 'no_telepon',
-                    name: 'no_telepon'
+                    data: 'telepon',
+                    name: 'telepon'
                 },
                 {
                     data: 'action',

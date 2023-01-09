@@ -14,6 +14,7 @@
 
 @section('content')
     <x-alert></x-alert>
+
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -35,7 +36,7 @@
                                 <th>Nisn</th>
                                 <th>Kelas</th>
                                 <th>Jenis Kelamin</th>
-                                <th>No Telepon</th>
+                                <th>Telepon</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -60,3 +61,18 @@
     </div>
     <!-- /.row -->
 @endsection
+
+
+@push('customJS')
+    {{-- Plugin & Datatables  --}}
+    <script src="{{ 'plugins/datatables/jquery.datatables.min.js' }}"></script>
+    <script src="{{ 'plugins/datatables-bs4/js/dataTables.bootstrap4.min.js' }}"></script>
+    <script src="{{ 'plugins/datatables-responsive/js/dataTables.responsive.min.js' }}"></script>
+    <script src="{{ 'plugins/datatables-responsive/js/responsive.bootstrap.min.js' }}"></script>
+    {{-- Sweetalert 2 --}}
+    <script type="text/javascript" src="{{ 'plugins/sweetalert2/sweetalert2.min.js' }}"></script>
+    {{-- Select2 --}}
+    <script src="{{ 'plugins/select2/js/select2.full.min.js' }}"></script>
+
+    @include('admin/siswa/ajax')
+@endpush
