@@ -26,7 +26,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Route Admin
+    // Route::resource('siswa', 'SiswaController');
     Route::get('siswa', [SiswaController::class, 'index'])->name('siswa');
+    Route::post('siswa', [SiswaController::class, 'store'])->name('siswa.store');
     Route::get('user', [UserController::class, 'index'])->name('user');
     // Route Petugas
 

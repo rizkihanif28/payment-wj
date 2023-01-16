@@ -15,9 +15,9 @@ class CreatePembayaransTable extends Migration
     {
         Schema::create('pembayarans', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('petugas_id')->nullable()->constrained('petugas')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('siswa_id')->nullable()->constrained('siswas')->onUpdate('cascade')->onDelete('cascade');
             $table->string('kode_pembayaran');
-            $table->integer('petugas_id');
-            $table->integer('siswa_id');
             $table->string('nisn')->nullable();
             $table->string('tangga_bayar')->nullable();
             $table->string('bulan_bayar')->nullable();

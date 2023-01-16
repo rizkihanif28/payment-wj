@@ -255,7 +255,7 @@ class DatabaseSeeder extends Seeder
 
         $user5 = User::create([
             'username' => 'zizah79',
-            'email' => 'zizah@gmail.com',
+            'email' => 'zizah79@gmail.com',
             'password' => Hash::make('zizah79')
         ]);
         $user5->assignRole('siswa');
