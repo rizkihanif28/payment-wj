@@ -59,14 +59,14 @@
 
 @push('customJS')
     {{-- Plugin & Datatables  --}}
-    <script src="{{ 'plugins/datatables/jquery.datatables.min.js' }}"></script>
-    <script src="{{ 'plugins/datatables-bs4/js/dataTables.bootstrap4.min.js' }}"></script>
-    <script src="{{ 'plugins/datatables-responsive/js/dataTables.responsive.min.js' }}"></script>
-    <script src="{{ 'plugins/datatables-responsive/js/responsive.bootstrap.min.js' }}"></script>
+    <script src="{{ asset('plugins/datatables/jquery.datatables.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
     {{-- Sweetalert 2 --}}
-    <script type="text/javascript" src="{{ 'plugins/sweetalert2/sweetalert2.min.js' }}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
     {{-- Select2 --}}
-    <script src="{{ 'plugins/select2/js/select2.full.min.js' }}"></script>
+    <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
 
     @include('admin/user/ajax')
 @endpush

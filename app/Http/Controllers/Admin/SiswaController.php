@@ -87,17 +87,6 @@ class SiswaController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -105,7 +94,8 @@ class SiswaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $siswa = Siswa::with(['kelas'])->findOrFail($id);
+        return response()->json(['data' => $siswa]);
     }
 
     /**
@@ -117,7 +107,31 @@ class SiswaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'nama_siswa' => $request->nama_siswa,
+            'nisn' => $request->nisn,
+            'nis' => $request->nis,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'email' => $request->email,
+            'alamat' => $request->alamat,
+            'telepon' => $request->telepon,
+            'kelas_id' => $request->kelas_id,
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()->all()]);
+        }
+        Siswa::findOrFail($id)->update([
+            'nama_siswa' => $request->nama_siswa,
+            'nisn' => $request->nisn,
+            'nis' => $request->nis,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'email' => $request->email,
+            'alamat' => $request->alamat,
+            'telepon' => $request->telepon,
+            'kelas_id' => $request->kelas_id,
+        ]);
+        return response()->json(['message' => 'Berhasil update!']);
     }
 
     /**

@@ -40,7 +40,7 @@
                     </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a href="{{ route('siswa') }}" class="nav-link {{ Request::segment(1) == 'siswa' ? 'active' : '' }}">
+                    <a href="{{ route('siswa') }}" class="nav-link {{ Request::segment(2) == 'siswa' ? 'active' : '' }}">
                         <i class="fas fa-th-large"></i> <span>Siswa</span>
                     </a>
                 </li>

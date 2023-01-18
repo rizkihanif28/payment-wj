@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\SiswaController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Models\Siswa;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,13 +28,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Route Admin
-    // Route::resource('siswa', 'SiswaController');
-    Route::get('siswa', [SiswaController::class, 'index'])->name('siswa');
-    Route::post('siswa', [SiswaController::class, 'store'])->name('siswa.store');
+    Route::get('admin/siswa', [SiswaController::class, 'index'])->name('siswa');
+    Route::post('admin/siswa', [SiswaController::class, 'store'])->name('siswa.store');
+    Route::get('admin/siswa/{id}/edit', [SiswaController::class, 'edit'])->name('siswa.edit');
+    Route::post('admin/siswa/{id}', [SiswaController::class, 'update'])->name('siswa.update');
+    // Route Admin Kelas
     Route::get('kelas', [KelasController::class, 'index'])->name('kelas');
+    // Route Admin User
     Route::get('user', [UserController::class, 'index'])->name('user');
     // Route Petugas
-
     // Route Siswa
 
 });

@@ -61,7 +61,7 @@
     {{-- row --}}
 @endsection
 
-{{-- Modal Create --}}
+{{-- modal create --}}
 <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
@@ -152,6 +152,110 @@
         </div>
     </div>
 </div>
+{{-- end create modal --}}
+
+{{-- modal edit --}}
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createModalLabel">Edit Data</h5>
+                <hr>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="update">
+                <div class="modal-body">
+                    <div class="alert alert-danger print-error-msg" style="display: none;">
+                        <ul></ul>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="nama_siswa_edit">Nama Siswa</label>
+                                <input type="hidden" id="id_edit" name="id_edit" class="form-control" readonly>
+                                <input required type="text" id="nama_siswa_edit" name="nama_siswa_edit"
+                                    class="form-control">
+                            </div>
+                        </div>
+                        {{-- <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input required type="hidden" id="username" name="username" class="form-control"
+                                    readonly>
+                            </div>
+                        </div> --}}
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="nisn_edit">NISN</label>
+                                <input required type="text" id="nisn_edit" name="nisn_edit" class="form-control"
+                                    readonly>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="nis_edit">NIS</label>
+                                <input required type="text" id="nis_edit" name="nis_edit" class="form-control"
+                                    readonly>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="jenis_kelamin_edit">Jenis Kelamin</label>
+                                <select required name="jenis_kelamin_edit" id="jenis_kelamin_edit"
+                                    class="form-control select2">
+                                    <option disabled="" selected="">- PILIH JENIS KELAMIN -</option>
+                                    <option value="Laki-Laki">Laki-Laki</option>
+                                    <option value="Perempuan">Perempuan</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="email_edit">Email</label>
+                                <input required type="email_edit" id="email_edit" name="email_edit"
+                                    class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="alamat_edit">Alamat</label>
+                                <input required type="text" id="alamat_edit" name="alamat_edit"
+                                    class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="telepon_edit">Telepon</label>
+                                <input required type="text" id="telepon_edit" name="telepon_edit"
+                                    class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="kelas_id_edit">Kelas</label>
+                                <select required name="kelas_id_edit" id="kelas_id_edit"
+                                    class="form-control select2">
+                                    <option disabled="" selected="">- PILIH KELAS -</option>
+                                    @foreach ($kelas as $item)
+                                        <option value="{{ $item->id }}">{{ $item->nama_kelas }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{{-- end modal edit --}}
 
 
 @push('customJS')

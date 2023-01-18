@@ -4,7 +4,7 @@
         var table = $("#dataTable2").DataTable({
             processing: true,
             serverSide: true,
-            responsive: true,
+            "responsive": true,
             ajax: "{{ route('siswa') }}",
             columns: [{
                     data: 'DT_RowIndex',
@@ -84,6 +84,70 @@
             $(".print-error-msg").find("ul").append('<li>' + value + '</li>')
         });
     }
+
+    // edit siswa
+    $("body").on("click", ".btn-edit", function() {
+        var id = $(this).attr("id");
+        $.ajax({
+            url: "/admin/siswa/" + id + "/edit",
+            type: "GET",
+            success: function(response) {
+                $("#id_edit").val(response.data.id);
+                $("#nama_siswa_edit").val(response.data.nama_siswa);
+                $("#nisn_edit").val(response.data.nisn);
+                $("#nis_edit").val(response.data.nis);
+                $("#jenis_kelamin_edit").val(response.data.jenis_kelamin);
+                $("#email_edit").val(response.data.email);
+                $("#alamat_edit").val(response.data.alamat);
+                $("#telepon_edit").val(response.data.telepon);
+                $("#kelas_id_edit").val(response.data.kelas_id);
+                $("#editModal").modal("show");
+
+            },
+            error: function(err) {
+                if (err.status == 403) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Uups...',
+                        text: 'Not Allowed!'
+                    })
+                }
+            }
+        });
+    });
+
+    // action update
+    $('#update').on('submit', function(e) {
+        e.preventDefault()
+        var id = $("#id_edit").val()
+        $.ajax({
+            url: '/admin/siswa/' + id,
+            type: 'POST',
+            data: $(this).serialize(),
+            success: function(response) {
+                if ($.isEmptyObject(response.error)) {
+                    $("#editModal").modal("hide")
+                    $("#dataTable2").DataTable().ajax.reload()
+                    Swal.fire(
+                        '',
+                        response.message,
+                        'success'
+                    )
+                } else {
+                    printErrorMsg(response.error)
+                }
+            },
+            error: function(err) {
+                if (err.status == 403) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Uups...',
+                        text: 'Not Allowed!'
+                    })
+                }
+            }
+        })
+    })
 
     //Initialize Select2 Elements
     $('.select2').select2()
