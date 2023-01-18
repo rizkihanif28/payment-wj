@@ -3,7 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\User;
-use DataTables;
+use Yajra\DataTables\Facades\DataTables;
 
 class UserDataTable
 {

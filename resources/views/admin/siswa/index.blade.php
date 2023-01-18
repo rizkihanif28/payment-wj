@@ -14,7 +14,6 @@
 
 @section('content')
     <x-alert></x-alert>
-
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -134,8 +133,8 @@
                         </div>
                         <div class="col-lg-3">
                             <div class="form-group">
-                                <label for="kelas">Kelas</label>
-                                <select required name="kelas" id="kelas" class="form-control select2">
+                                <label for="kelas_id">Kelas</label>
+                                <select required name="kelas_id" id="kelas_id" class="form-control select2">
                                     <option disabled="" selected="">- PILIH KELAS -</option>
                                     @foreach ($kelas as $item)
                                         <option value="{{ $item->id }}">{{ $item->nama_kelas }}</option>

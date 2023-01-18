@@ -48,11 +48,12 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             'nama_siswa' => 'required',
             'username' => 'required|unique:users',
-            'nisn' => 'required|unique:siswa',
-            'nis' => 'required|unique:siswa',
+            'nisn' => 'required|unique:siswas',
+            'nis' => 'required|unique:siswas',
             'email' => 'required|unique:users',
             'alamat' => 'required',
             'telepon' => 'required',
@@ -64,13 +65,13 @@ class SiswaController extends Controller
         DB::transaction(function () use ($request) {
             $user = User::create([
                 'username' => Str::lower($request->username),
+                'email' => Str::lower($request->email),
                 'password' => 'wj' . Hash::make(Str::random('5'))
             ]);
             $user->assignRole('siswa');
 
             Siswa::create([
-                'user_id' => $request->id,
-                'kelas_id' => $request->kelas_id,
+                'user_id' => $user->id,
                 'kode_siswa' => 'SSW' . Str::upper(Str::random(5)),
                 'nisn' => $request->nisn,
                 'nis' => $request->nis,
@@ -79,9 +80,10 @@ class SiswaController extends Controller
                 'email' => $request->email,
                 'alamat' => $request->alamat,
                 'telepon' => $request->telepon,
+                'kelas_id' => $request->kelas_id,
             ]);
-            return response()->json(['message' => 'Data berhasil di simpan!']);
         });
+        return response()->json(['message' => 'Data berhasil di simpan!']);
     }
 
     /**

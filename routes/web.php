@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\KelasController;
 use App\Http\Controllers\Admin\SiswaController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\DashboardController;
@@ -29,6 +30,7 @@ Route::middleware(['auth'])->group(function () {
     // Route::resource('siswa', 'SiswaController');
     Route::get('siswa', [SiswaController::class, 'index'])->name('siswa');
     Route::post('siswa', [SiswaController::class, 'store'])->name('siswa.store');
+    Route::get('kelas', [KelasController::class, 'index'])->name('kelas');
     Route::get('user', [UserController::class, 'index'])->name('user');
     // Route Petugas
 

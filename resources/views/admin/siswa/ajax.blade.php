@@ -1,10 +1,10 @@
-<script>
+<script type="text/javascript">
     $(function() {
 
         var table = $("#dataTable2").DataTable({
             processing: true,
             serverSide: true,
-            "responsive": true,
+            responsive: true,
             ajax: "{{ route('siswa') }}",
             columns: [{
                     data: 'DT_RowIndex',
@@ -38,7 +38,7 @@
                 },
             ]
         });
-    });
+    })
 
     // reset form
     function resetForm() {

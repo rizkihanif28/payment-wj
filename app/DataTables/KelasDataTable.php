@@ -2,14 +2,14 @@
 
 namespace App\DataTables;
 
-use App\Models\Siswa;
+use App\Models\Kelas;
 use Yajra\DataTables\Facades\DataTables;
 
-class SiswaDataTable
+class KelasDataTable
 {
     public function data()
     {
-        $data = Siswa::with(['kelas'])->orderBy('nama_siswa', 'asc');
+        $data = Kelas::orderBy('kompetensi_keahlian', 'asc');
         return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
@@ -20,6 +20,6 @@ class SiswaDataTable
                 return $btn;
             })
             ->rawColumns(['action'])
-            ->make(true);
+            ->make('true');
     }
 }
