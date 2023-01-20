@@ -40,17 +40,20 @@
                     </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a href="{{ route('siswa') }}" class="nav-link {{ Request::segment(2) == 'siswa' ? 'active' : '' }}">
+                    <a href="{{ route('siswa.index') }}"
+                        class="nav-link {{ Request::segment(2) == 'siswa' ? 'active' : '' }}">
                         <i class="fas fa-th-large"></i> <span>Siswa</span>
                     </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a href="{{ route('kelas') }}" class="nav-link {{ Request::segment(1) == 'kelas' ? 'active' : '' }}">
+                    <a href="{{ route('kelas.index') }}"
+                        class="nav-link {{ Request::segment(2) == 'kelas' ? 'active' : '' }}">
                         <i class="fas fa-map-marker-alt"></i><span>Kelas</span>
                     </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a href="{{ route('user') }}" class="nav-link {{ Request::segment(1) == 'user' ? 'active' : '' }}">
+                    <a href="{{ route('user.index') }}"
+                        class="nav-link {{ Request::segment(2) == 'user' ? 'active' : '' }}">
                         <i class="fas fa-plug"></i> <span>User</span>
                     </a>
                 </li>
@@ -108,11 +111,11 @@
                         <span>Pembayaran</span></a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a href="{{ route('siswa') }}" class="nav-link"><i class="fas fa-th-large"></i>
+                    <a href="{{ route('siswa.index') }}" class="nav-link"><i class="fas fa-th-large"></i>
                         <span>Siswa</span></a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a href="{{ route('kelas') }}" class="nav-link"><i class="fas fa-map-marker-alt"></i>
+                    <a href="{{ route('kelas.index') }}" class="nav-link"><i class="fas fa-map-marker-alt"></i>
                         <span>Kelas</span></a>
                 </li>
                 <li class="nav-item dropdown">

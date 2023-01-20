@@ -5,7 +5,6 @@ use App\Http\Controllers\Admin\SiswaController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
-use App\Models\Siswa;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,21 +24,38 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('home', [HomeController::class, 'index'])->name('home');
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
-    // Route Admin
-    Route::get('admin/siswa', [SiswaController::class, 'index'])->name('siswa');
-    Route::post('admin/siswa', [SiswaController::class, 'store'])->name('siswa.store');
-    Route::get('admin/siswa/{id}/edit', [SiswaController::class, 'edit'])->name('siswa.edit');
-    Route::post('admin/siswa/{id}', [SiswaController::class, 'update'])->name('siswa.update');
-    // Route Admin Kelas
-    Route::get('kelas', [KelasController::class, 'index'])->name('kelas');
-    // Route Admin User
-    Route::get('user', [UserController::class, 'index'])->name('user');
-    // Route Petugas
-    // Route Siswa
-
 });
+
+Route::prefix('admin')
+    ->namespace('Admin')
+    ->middleware(['auth'])
+    ->group(function () {
+        Route::middleware(['role:admin'])->group(function () {
+            Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        });
+        Route::middleware(['role:admin|petugas'])->group(function () {
+            // Siswa
+            Route::get('siswa', [SiswaController::class, 'index'])->name('siswa.index');
+            Route::post('siswa/store', [SiswaController::class, 'store'])->name('siswa.store');
+            Route::get('siswa/{id}/edit', [SiswaController::class, 'edit'])->name('siswa.edit');
+            Route::post('siswa/{id}/update', [SiswaController::class, 'update'])->name('siswa.update');
+            Route::delete('siswa/{id}/delete', [SiswaController::class, 'destroy'])->name('siswa.delete');
+            // Kelas
+            Route::get('kelas', [KelasController::class, 'index'])->name('kelas.index');
+            Route::post('kelas/store', [KelasController::class, 'store'])->name('kelas.store');
+            Route::get('kelas/{id}/edit', [KelasController::class, 'edit'])->name('kelas.edit');
+            Route::post('kelas/{id}/update', [KelasController::class, 'update'])->name('kelas.update');
+            Route::delete('kelas/{id}/delete', [KelasController::class, 'destroy'])->name('kelas.delete');
+            // User
+            Route::get('user', [UserController::class, 'index'])->name('user.index');
+        });
+    });
+// Route Admin
+// Route Admin Kelas
+// Route Admin User
+// Route Petugas
+// Route Siswa
+
 
 // Route::prefix('admin')
 //     ->middleware(['auth'])

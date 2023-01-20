@@ -4,7 +4,7 @@
             processing: true,
             serveSide: true,
             "responsive": true,
-            ajax: "{{ route('user') }}",
+            ajax: "{{ route('user.index') }}",
             columns: [{
                     data: 'DT_RowIndex',
                     name: 'id'

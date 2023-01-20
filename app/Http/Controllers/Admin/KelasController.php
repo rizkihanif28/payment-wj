@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\DataTables\KelasDataTable;
 use App\Http\Controllers\Controller;
+use App\Models\Kelas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class KelasController extends Controller
 {
@@ -30,16 +32,6 @@ class KelasController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -47,18 +39,20 @@ class KelasController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $validator = Validator::make($request->all(), [
+            'nama_kelas' => 'required|unique:kelas',
+            'kompetensi_keahlian' => 'required'
+        ], [
+            'nama_kelas.required' => 'nama kelas tidak boleh kosong!',
+            'nama_kelas.required' => 'nama kelas sudah terdaftar!',
+            'kompetensi_keahlian.required' => 'kompetensi_keahlian tidak boleh kosong!'
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()]);
+        }
+        Kelas::create($request->all());
+        return response()->json(['message' => 'Data berhasil di tambahkan!']);
     }
 
     /**
@@ -69,7 +63,8 @@ class KelasController extends Controller
      */
     public function edit($id)
     {
-        //
+        $kelas = Kelas::findOrFail($id);
+        return response()->json(['data' => $kelas]);
     }
 
     /**
@@ -81,7 +76,21 @@ class KelasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'nama_kelas' => 'required',
+            'kompetensi_keahlian' => 'required'
+        ], [
+            'nama_kelas.required' => 'nama kelas tidak boleh kosong!',
+            'nama_kelas.required' => 'nama kelas sudah terdaftar!',
+            'kompetensi_keahlian.required' => 'kompetensi_keahlian tidak boleh kosong!'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()->all()]);
+        }
+        Kelas::findOrFail($id)->update($request->all());
+
+        return response()->json(['message' => 'Berhasil update!']);
     }
 
     /**
@@ -92,6 +101,8 @@ class KelasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Kelas::findOrFail($id)->delete();
+
+        return response()->json(['message' => 'Berhasil hapus data!']);
     }
 }

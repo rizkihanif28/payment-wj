@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\DataTables\SiswaDataTable;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use App\Models\Kelas;
@@ -12,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\DataTables\SiswaDataTable;
 
 class SiswaController extends Controller
 {
@@ -108,14 +108,9 @@ class SiswaController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'nama_siswa' => $request->nama_siswa,
-            'nisn' => $request->nisn,
-            'nis' => $request->nis,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'email' => $request->email,
-            'alamat' => $request->alamat,
-            'telepon' => $request->telepon,
-            'kelas_id' => $request->kelas_id,
+            'nama_siswa' => 'required',
+            'alamat' => 'required',
+            'telepon' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -142,6 +137,10 @@ class SiswaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $siswa = Siswa::findOrFail($id);
+        User::findOrFail($siswa->user_id)->delete();
+        $siswa->delete();
+
+        return response()->json(['message' => 'Berhasil di hapus!']);
     }
 }

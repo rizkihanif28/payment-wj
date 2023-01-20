@@ -51,10 +51,10 @@
     {{-- row --}}
 
 
-    {{-- Modal Create --}}
+    {{-- modal create --}}
     <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Tambah Data</h5>
@@ -69,18 +69,20 @@
                             <ul></ul>
                         </div>
                         <div class="row">
-                            <div class="col-lg-3">
+                            <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="nama_kelas_create">Nama Kelas</label>
-                                    <input required type="text" id="nama_kelas_create" name="nama_kelas_create"
+                                    <input required type="text" id="nama_kelas_create" name="nama_kelas"
                                         class="form-control">
                                 </div>
                             </div>
-                            <div class="col-lg-3">
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="kompetensi_keahlian_create">Kompetensi Keahlian</label>
                                     <input required type="text" id="kompetensi_keahlian_create"
-                                        name="kompetensi_keahlian_create" class="form-control">
+                                        name="kompetensi_keahlian" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -93,6 +95,55 @@
             </div>
         </div>
     </div>
+    {{-- end modal create --}}
+
+    {{-- modal edit --}}
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Data</h5>
+                    <hr>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="update">
+                    <div class="modal-body">
+                        <div class="alert alert-danger print-error-msg" style="display: none;">
+                            <ul></ul>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="nama_kelas_edit">Nama Kelas</label>
+                                    <input type="hidden" name="id" id="id_edit" class="form-control" readonly>
+                                    <input required type="text" name="nama_kelas" id="nama_kelas_edit"
+                                        class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="kompetensi_keahlian_edit">Kompetensi Keahlian</label>
+                                    <input required type="text" name="kompetensi_keahlian" id="kompetensi_keahlian_edit"
+                                        class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{-- end modal edit --}}
+
 @endsection
 
 @push('customJS')

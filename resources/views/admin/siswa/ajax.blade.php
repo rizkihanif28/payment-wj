@@ -5,7 +5,7 @@
             processing: true,
             serverSide: true,
             "responsive": true,
-            ajax: "{{ route('siswa') }}",
+            ajax: "{{ route('siswa.index') }}",
             columns: [{
                     data: 'DT_RowIndex',
                     name: 'id'
@@ -80,7 +80,7 @@
     function printErrorMsg(msg) {
         $(".print-error-msg").find("ul").html('');
         $(".print-error-msg").css('display', 'block');
-        $each(msg, function(key, value) {
+        $.each(msg, function(key, value) {
             $(".print-error-msg").find("ul").append('<li>' + value + '</li>')
         });
     }
@@ -96,12 +96,12 @@
                 $("#nama_siswa_edit").val(response.data.nama_siswa);
                 $("#nisn_edit").val(response.data.nisn);
                 $("#nis_edit").val(response.data.nis);
-                $("#jenis_kelamin_edit").val(response.data.jenis_kelamin);
-                $("#email_edit").val(response.data.email);
-                $("#alamat_edit").val(response.data.alamat);
-                $("#telepon_edit").val(response.data.telepon);
-                $("#kelas_id_edit").val(response.data.kelas_id);
-                $("#editModal").modal("show");
+                $("#jenis_kelamin_edit").val(response.data.jenis_kelamin)
+                $("#email_edit").val(response.data.email)
+                $("#alamat_edit").val(response.data.alamat)
+                $("#telepon_edit").val(response.data.telepon)
+                $("#kelas_id_edit").val(response.data.kelas_id)
+                $("#editModal").modal("show")
 
             },
             error: function(err) {
@@ -116,13 +116,13 @@
         });
     });
 
-    // action update
+    // action update 
     $('#update').on('submit', function(e) {
         e.preventDefault()
         var id = $("#id_edit").val()
         $.ajax({
-            url: '/admin/siswa/' + id,
-            type: 'POST',
+            url: "/admin/siswa/" + id + "/update",
+            type: "POST",
             data: $(this).serialize(),
             success: function(response) {
                 if ($.isEmptyObject(response.error)) {
@@ -146,7 +146,45 @@
                     })
                 }
             }
+        });
+    });
+
+    // action delete
+    $("body").on("click", ".btn-delete", function() {
+        var id = $(this).attr("id");
+        Swal.fire({
+            title: 'Yakin hapus data ini?',
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: '#fc544b',
+            cancelButtonColor: '#78828a',
+            confirmButtonText: 'Hapus',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "/admin/siswa/" + id + "/delete",
+                    type: 'DELETE',
+                    success: function(response) {
+                        $("#dataTable2").DataTable().ajax.reload()
+                        Swal.fire(
+                            '',
+                            response.message,
+                            'success'
+                        )
+                    },
+                    error: function(err) {
+                        if (err.status == 403) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Uups...',
+                                text: 'Not Allowed!'
+                            })
+                        }
+                    }
+                })
+            }
         })
+
     })
 
     //Initialize Select2 Elements
