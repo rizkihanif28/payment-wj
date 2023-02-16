@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\KelasController;
+use App\Http\Controllers\Admin\PetugasController;
 use App\Http\Controllers\Admin\SiswaController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\DashboardController;
@@ -32,6 +33,14 @@ Route::prefix('admin')
     ->group(function () {
         Route::middleware(['role:admin'])->group(function () {
             Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+            // User
+            Route::get('user', [UserController::class, 'index'])->name('user.index');
+            Route::post('user/store', [UserController::class, 'store'])->name('user.store');
+            Route::get('user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
+            Route::post('user/{id}/update', [UserController::class, 'update'])->name('user.update');
+            Route::delete('user/{id}/delete', [UserController::class, 'destroy'])->name('user.delete');
+            // Petugas
+            Route::get('petugas', [PetugasController::class, 'index'])->name('petugas.index');
         });
         Route::middleware(['role:admin|petugas'])->group(function () {
             // Siswa
@@ -46,27 +55,7 @@ Route::prefix('admin')
             Route::get('kelas/{id}/edit', [KelasController::class, 'edit'])->name('kelas.edit');
             Route::post('kelas/{id}/update', [KelasController::class, 'update'])->name('kelas.update');
             Route::delete('kelas/{id}/delete', [KelasController::class, 'destroy'])->name('kelas.delete');
-            // User
-            Route::get('user', [UserController::class, 'index'])->name('user.index');
         });
     });
-// Route Admin
-// Route Admin Kelas
-// Route Admin User
-// Route Petugas
-// Route Siswa
-
-
-// Route::prefix('admin')
-//     ->middleware(['auth'])
-//     ->group(function () {
-//         Route::middleware(['role:admin'])->group(function () {
-//             Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-//             Route::resource('user', 'UserController');
-//         });
-//         Route::middleware(['role:admin|petugas'])->group(function () {
-//             Route::resource('siswa', 'SiswaController');
-//         });
-//     });
 
 require __DIR__ . '/auth.php';

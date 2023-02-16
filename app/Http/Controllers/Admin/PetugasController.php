@@ -2,33 +2,56 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\DataTables\UserDataTable;
+use App\DataTables\PetugasDataTable;
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 
-class UserController extends Controller
+class PetugasController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, UserDataTable $datatable)
+    public function index(Request $request, PetugasDataTable $datatable)
     {
         if ($request->ajax()) {
-            return $datatable->data();
+            return $request->$datatable->data();
         }
-
-        return view('admin/user/index');
+        return view('admin/petugas/index');
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -38,8 +61,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::findOrFail($id);
-        return response()->json(['data' => $user]);
+        //
     }
 
     /**
@@ -51,11 +73,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        User::findOrFail($id)->update([
-            'username' => $request->username,
-            'email' => $request->email,
-            'password' => $request->password ? $request->old_password : Hash::make($request->password)
-        ]);
+        //
     }
 
     /**
@@ -66,7 +84,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::findOrFail($id)->delete();
-        return response()->json(['message' => 'Berhasil di hapus!']);
+        //
     }
 }

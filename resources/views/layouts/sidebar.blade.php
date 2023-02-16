@@ -63,8 +63,9 @@
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link"><i class="fas fa-plug"></i>
-                        <span>Petugas</span></a>
+                    <a href="{{ route('petugas.index') }}"
+                        class="nav-link {{ Request::segment(2) == 'petugas' ? 'active' : '' }}">
+                        <i class="fas fa-plug"></i><span>Petugas</span></a>
                 </li>
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link"><i class="fas fa-plug"></i>

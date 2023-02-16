@@ -14,19 +14,10 @@
 
 @section('content')
     <x-alert></x-alert>
-
     <div class="row">
         <div class="col-12">
             <div class="card">
-                {{-- <div class="card-header">
-                    @can('create-user')
-                        <a href="javascript:void(0)" class="btn btn-primary btn-sm" data-toggle="modal"
-                            data-target="#createModal">
-                            <i class="fas fa-plus fa-fw"></i> Tambah Data
-                        </a>
-                    @endcan
-                </div> --}}
-                <!-- /.card-header -->
+                {{-- card-header  --}}
                 <div class="card-body">
                     <table id="dataTable2" class="table table-bordered table-striped">
                         <thead>
@@ -47,14 +38,115 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- /.card-body -->
+                {{-- card-body  --}}
             </div>
-            <!-- /.card -->
+            {{-- card  --}}
         </div>
-        <!-- /.col -->
+        {{-- col  --}}
     </div>
-    <!-- /.row -->
+    {{-- row  --}}
 @endsection
+
+{{-- create modal --}}
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Tambah Data</h5>
+                <hr>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="store">
+                <div class="modal-body">
+                    <div class="alert alert-danger print-error-msg" style="display: none;">
+                        <ul></ul>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="n">Username</label>
+                                <input required type="" id="n" name="name" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="e">Email</label>
+                                <input required type="" id="e" name="email" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="p">Password</label>
+                                <input required type="password" id="p" name="password" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="r">Role</label>
+                                <select name="role" id="r" class="form-control">
+                                    <option disabled="">- PILIH ROLE -</option>
+                                    <option value="admin">Admin</option>
+                                    <option value="user">User</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{{-- end create modal --}}
+
+{{-- edit modal --}}
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Data</h5>
+                <hr>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="update">
+                    <div class="alert alert-danger print-error-msg" style="display: none;">
+                        <ul></ul>
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="hidden" id="id" name="id" class="form-control">
+                        <input type="" id="username" name="username" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="hidden" id="old_password" name="old_password" class="form-control">
+                        <input type="password" id="password" name="password" class="form-control">
+                        <small class="text-secondary">Kosongkan password jika tidak ingin diubah</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="e">Email</label>
+                        <input type="email" id="email" name="email" class="form-control">
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+{{-- end edit modal --}}
 
 
 @push('customJS')

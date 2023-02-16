@@ -1,9 +1,9 @@
 <script type="text/javascript">
     $(function() {
-        var table = $("#dataTable2").dataTable({
+        var table = $("#dataTable2").DataTable({
             processing: true,
             serverSide: true,
-            responsive: true,
+            "responsive": true,
             ajax: "{{ route('kelas.index') }}",
             columns: [{
                     data: 'DT_RowIndex',
