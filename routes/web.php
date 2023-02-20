@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\SiswaController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Models\Petugas;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,6 +42,10 @@ Route::prefix('admin')
             Route::delete('user/{id}/delete', [UserController::class, 'destroy'])->name('user.delete');
             // Petugas
             Route::get('petugas', [PetugasController::class, 'index'])->name('petugas.index');
+            Route::post('petugas/store', [PetugasController::class, 'store'])->name('petugas.store');
+            Route::get('petugas/{id}/edit', [PetugasController::class, 'edit'])->name('petugas.edit');
+            Route::post('petugas/{id}/update', [PetugasController::class, 'update'])->name('petugas.update');
+            Route::delete('petugas/{id}/delete', [PetugasController::class, 'destroy'])->name('petugas.delete');
         });
         Route::middleware(['role:admin|petugas'])->group(function () {
             // Siswa

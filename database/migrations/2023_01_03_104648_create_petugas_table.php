@@ -20,6 +20,7 @@ class CreatePetugasTable extends Migration
             $table->string('nip')->nullable();
             $table->string('nama_petugas')->nullable();
             $table->string('jenis_kelamin')->nullable();
+            $table->string('email')->nullable();
             $table->timestamps();
         });
     }

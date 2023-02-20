@@ -4,10 +4,17 @@ namespace App\Http\Controllers\Admin;
 
 use App\DataTables\PetugasDataTable;
 use App\Http\Controllers\Controller;
+use App\Models\Petugas;
+use App\Models\User;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class PetugasController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -16,19 +23,9 @@ class PetugasController extends Controller
     public function index(Request $request, PetugasDataTable $datatable)
     {
         if ($request->ajax()) {
-            return $request->$datatable->data();
+            return $datatable->data();
         }
         return view('admin/petugas/index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -39,18 +36,35 @@ class PetugasController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $validator = Validator::make($request->all(), [
+            'nip' => 'required|unique:petugas',
+            'nama_petugas' => 'required',
+            'jenis_kelamin' => 'required',
+            'email' => 'required|email:rfc,dns|unique:users'
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()->all()]);
+        }
+
+        DB::transaction(function () use ($request) {
+            $user = User::create([
+                'username' => Str::lower($request->username),
+                'email' => Str::lower($request->email),
+                'password' => 'ptgs', Hash::make(Str::random('2'))
+            ]);
+            $user->assignRole('petugas');
+
+            Petugas::create([
+                'user_id' => $user->id,
+                'kode_petugas' => 'PTGS' . Str::random(2),
+                'nip' => $request->nip,
+                'nama_petugas' => $request->nama_petugas,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'email' => $request->email
+            ]);
+        });
+        return response()->json(['message' => 'Data berhasil disimpan!']);
     }
 
     /**
@@ -61,7 +75,8 @@ class PetugasController extends Controller
      */
     public function edit($id)
     {
-        //
+        $petugas = Petugas::findOrFail($id);
+        return response()->json(['data' => $petugas]);
     }
 
     /**
@@ -73,7 +88,18 @@ class PetugasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'nip' => 'required',
+            'nama_petugas' => 'required',
+            'jenis_kelamin' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()->all()]);
+        }
+
+        Petugas::findOrFail($id)->update($request->all());
+        return response()->json(['message' => 'Berhasil diubah!']);
     }
 
     /**
@@ -84,6 +110,7 @@ class PetugasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Petugas::findOrFail($id)->delete();
+        return response()->json(['message' => 'Berhasil dihapus!']);
     }
 }

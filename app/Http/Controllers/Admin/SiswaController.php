@@ -66,7 +66,7 @@ class SiswaController extends Controller
             $user = User::create([
                 'username' => Str::lower($request->username),
                 'email' => Str::lower($request->email),
-                'password' => 'wj' . Hash::make(Str::random('5'))
+                'password' => 'sws' . Hash::make(Str::random('2'))
             ]);
             $user->assignRole('siswa');
 

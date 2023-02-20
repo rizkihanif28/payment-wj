@@ -14,7 +14,8 @@ class Petugas extends Model
         'kode_petugas',
         'nip',
         'nama_petugas',
-        'jenis_kelamin'
+        'jenis_kelamin',
+        'email'
     ];
 
     public function user()

@@ -11,7 +11,7 @@
                 },
                 {
                     data: 'nama_kelas',
-                    name: 'nama_kelas',
+                    name: 'nama_kelas'
                 },
                 {
                     data: 'kompetensi_keahlian',

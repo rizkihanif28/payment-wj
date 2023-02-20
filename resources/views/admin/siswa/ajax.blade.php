@@ -1,6 +1,5 @@
 <script type="text/javascript">
     $(function() {
-
         var table = $("#dataTable2").DataTable({
             processing: true,
             serverSide: true,

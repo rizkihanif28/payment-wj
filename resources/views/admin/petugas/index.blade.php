@@ -20,7 +20,7 @@
                 <div class="card-header">
                     @can('create-petugas')
                         <a href="javascript:void(0)" class="btn btn-primary btn-sm" data-toggle="modal"
-                            data-target="#crateModal">
+                            data-target="#createModal">
                             <i class="fas fa-plus fa-fw"></i> Tambah Data
                         </a>
                     @endcan
@@ -57,47 +57,125 @@
     {{-- row --}}
 
     {{-- modal create --}}
-    {{-- <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel"
+    <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel"
         aria-hidden="true">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Tambah Data</h5>
-                <hr>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Tambah Data</h5>
+                    <hr>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="store">
+                    <div class="modal-body">
+                        <div class="alert alert-danger print-error-msg" style="display: none;">
+                            <ul></ul>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="nip">NIP</label>
+                                    <input required type="text" id="nip" name="nip" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="nama_petugas">Nama Petugas</label>
+                                    <input required type="text" id="nama_petugas" name="nama_petugas"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input required type="email" id="email" name="email" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="jenis_kelamin">Jenis Kelamin</label>
+                                    <select required name="jenis_kelamin" id="jenis_kelamin" class="form-control select2">
+                                        <option disabled selected="">- PILIH JENIS KELAMIN -</option>
+                                        <option value="Laki-Laki">Laki-Laki</option>
+                                        <option value="Perempuan">Perempuan</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <form id="store">
-                <div class="alert alert-danger print-error-msg" style="display: none;">
-                    <ul></ul>
-                </div>
-                <div class="row">
-                    <div class="col-lg-3">
-                        <div class="form-group">
-                            <label for="nip">NIP</label>
-                            <input required type="text" id="nip" name="nip" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="form-group">
-                            <label for="nama_petugas">Nama Petugas</label>
-                            <input required type="text" id="nama_petugas" name="nama_petugas" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="form-group">
-                            <label for="jenis_kelamin">Jenis Kelamin</label>
-                            <input required type="text" id="jenis_kelamin" name="jenis_kelamin" class="form-control">
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </div>
-            </form>
         </div>
-    </div> --}}
+    </div>
+
+    {{-- modal edit --}}
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Tambah Data</h5>
+                    <hr>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="update">
+                    <div class="modal-body">
+                        <div class="alert alert-danger print-error-msg" style="display: none;">
+                            <ul></ul>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="nip_edit">NIP</label>
+                                    <input required type="hidden" id="id_edit" name="id_edit" class="form-control"
+                                        readonly>
+                                    <input required type="text" id="nip_edit" name="nip_edit" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="nama_petugas_edit">Nama Petugas</label>
+                                    <input required type="text" id="nama_petugas_edit" name="nama_petugas_edit"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="email_edit">Email</label>
+                                    <input required type="email" id="email_edit" name="email_edit"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="jenis_kelamin_edit">Jenis Kelamin</label>
+                                    <select required name="jenis_kelamin_edit" id="jenis_kelamin_edit"
+                                        class="form-control select2">
+                                        <option disabled selected="">- PILIH JENIS KELAMIN -</option>
+                                        <option value="Laki-Laki">Laki-Laki</option>
+                                        <option value="Perempuan">Perempuan</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @push('customJS')

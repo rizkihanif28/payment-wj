@@ -50,6 +50,19 @@ class DatabaseSeeder extends Seeder
             'name' => 'delete-users'
         ]);
 
+        Permission::create([
+            'name' => 'create-petugas'
+        ]);
+        Permission::create([
+            'name' => 'read-petugas'
+        ]);
+        Permission::create([
+            'name' => 'update-petugas'
+        ]);
+        Permission::create([
+            'name' => 'delete-petugas'
+        ]);
+
         //periode
         Permission::create([
             'name' => 'create-periode'
@@ -144,6 +157,7 @@ class DatabaseSeeder extends Seeder
             'create-kelas', 'read-kelas', 'update-kelas', 'delete-kelas',
             'create-periode', 'read-periode', 'update-periode', 'delete-periode',
             'create-users', 'read-users', 'update-users', 'delete-users',
+            'create-petugas', 'read-petugas', 'update-petugas', 'delete-petugas',
             'create-roles', 'read-roles', 'update-roles', 'delete-roles',
             'create-pembayaran', 'read-pembayaran', 'update-pembayaran', 'delete-pembayaran',
             'create-permissions', 'read-permissions', 'update-permissions', 'delete-permissions',
@@ -195,8 +209,10 @@ class DatabaseSeeder extends Seeder
         $petugas1 = Petugas::create([
             'user_id' => $user1->id,
             'kode_petugas' => 'WJ' . Str::upper(Str::random(5)),
+            'nip' => '00111',
             'nama_petugas' => 'Administrator',
-            'jenis_kelamin' => 'Laki-Laki'
+            'jenis_kelamin' => 'Laki-Laki',
+            'email' => 'admin@gmail.com'
         ]);
 
         $user2 = User::create([
@@ -208,9 +224,11 @@ class DatabaseSeeder extends Seeder
 
         $petugas2 = Petugas::create([
             'user_id' => $user2->id,
-            'kode_petugas' => 'WJ' . Str::upper(Str::random(5)),
+            'kode_petugas' => 'PTGS' . Str::upper(Str::random(2)),
+            'nip' => '00112',
             'nama_petugas' => 'Tata Usaha',
-            'jenis_kelamin' => 'Laki-Laki'
+            'jenis_kelamin' => 'Laki-Laki',
+            'email' => 'tatausaha1@gmail.com'
         ]);
 
         $user3 = User::create([
