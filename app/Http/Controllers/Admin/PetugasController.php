@@ -37,6 +37,7 @@ class PetugasController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'username' => 'required|unique:users',
             'nip' => 'required|unique:petugas',
             'nama_petugas' => 'required',
             'jenis_kelamin' => 'required',
@@ -51,12 +52,13 @@ class PetugasController extends Controller
             $user = User::create([
                 'username' => Str::lower($request->username),
                 'email' => Str::lower($request->email),
-                'password' => 'ptgs', Hash::make(Str::random('2'))
+                'password' => 'ptgs' . Hash::make(Str::random('2'))
             ]);
             $user->assignRole('petugas');
 
             Petugas::create([
                 'user_id' => $user->id,
+                'username' => $request->username,
                 'kode_petugas' => 'PTGS' . Str::random(2),
                 'nip' => $request->nip,
                 'nama_petugas' => $request->nama_petugas,
@@ -97,8 +99,12 @@ class PetugasController extends Controller
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()->all()]);
         }
-
-        Petugas::findOrFail($id)->update($request->all());
+        Petugas::findOrFail($id)->update([
+            'nip' => $request->nip,
+            'nama_petugas' => $request->nama_petugas,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'email' => $request->email
+        ]);
         return response()->json(['message' => 'Berhasil diubah!']);
     }
 
@@ -110,7 +116,10 @@ class PetugasController extends Controller
      */
     public function destroy($id)
     {
-        Petugas::findOrFail($id)->delete();
+        $petugas = Petugas::findOrFail($id);
+        User::findOrFail($petugas->user_id)->delete();
+        $petugas->delete();
+
         return response()->json(['message' => 'Berhasil dihapus!']);
     }
 }

@@ -33,7 +33,7 @@
 
     // reset form
     function resetForm() {
-        $("[name='kode_petugas']").val("")
+        $("[name='username']").val("")
         $("[name='nip']").val("")
         $("[name='nama_petugas']").val("")
         $("[name='jenis_kelamin']").val("")
@@ -80,11 +80,12 @@
             type: "GET",
             url: "/admin/petugas/" + id + "/edit",
             success: function(response) {
-                $("#id_edit").val(response.data.id);
-                $("#nip_edit").val(response.data.nip);
-                $("#nama_petugas_edit").val(response.data.nama_petugas);
-                $("#email_edit").val(response.data.email);
-                $("#jenis_kelamin_edit").val(response.data.jenis_kelamin);
+                $("#id_edit").val(response.data.id)
+                $("#nip_edit").val(response.data.nip)
+                $("#nama_petugas_edit").val(response.data.nama_petugas)
+                $("#email_edit").val(response.data.email)
+                $("#jenis_kelamin_edit").val(response.data.jenis_kelamin)
+                $("#editModal").modal("show")
             },
             error: function(err) {
                 if (err.status == 403) {
@@ -104,10 +105,10 @@
         var id = $("#id_edit").val()
         $.ajax({
             type: "POST",
-            url: "/admin/siswa/" + id + "/update",
+            url: "/admin/petugas/" + id + "/update",
             data: $(this).serialize(),
             success: function(response) {
-                if ($.$isEmptyObject(response.error)) {
+                if ($.isEmptyObject(response.error)) {
                     $("#editModal").modal("hide")
                     $("#dataTable2").DataTable().ajax.reload()
                     Swal.fire(
@@ -128,7 +129,7 @@
                     })
                 }
             }
-        })
+        });
     });
 
     // action delete
@@ -147,7 +148,7 @@
                     type: "DELETE",
                     url: "/admin/petugas/" + id + "/delete",
                     success: function(response) {
-                        $("#dataTable2").DataTable.ajax.reload()
+                        $("#dataTable2").DataTable().ajax.reload()
                         Swal.fire(
                             '',
                             response.message,

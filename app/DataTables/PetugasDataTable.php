@@ -9,7 +9,7 @@ class PetugasDataTable
 {
     public function data()
     {
-        $data = Petugas::latest();
+        $data = Petugas::orderBy('nama_petugas', 'asc');
         return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('action', function ($row) {

@@ -82,6 +82,12 @@
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
+                                    <label for="username">Username</label>
+                                    <input required type="text" id="username" name="username" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
                                     <label for="nama_petugas">Nama Petugas</label>
                                     <input required type="text" id="nama_petugas" name="nama_petugas"
                                         class="form-control">
@@ -134,31 +140,28 @@
                         <div class="row">
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    <label for="nip_edit">NIP</label>
-                                    <input required type="hidden" id="id_edit" name="id_edit" class="form-control"
-                                        readonly>
-                                    <input required type="text" id="nip_edit" name="nip_edit" class="form-control">
+                                    <label for="nip">NIP</label>
+                                    <input type="hidden" id="id_edit" name="id_edit" class="form-control" readonly>
+                                    <input type="text" id="nip_edit" name="nip" class="form-control">
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    <label for="nama_petugas_edit">Nama Petugas</label>
-                                    <input required type="text" id="nama_petugas_edit" name="nama_petugas_edit"
+                                    <label for="nama_petugas">Nama Petugas</label>
+                                    <input type="text" id="nama_petugas_edit" name="nama_petugas"
                                         class="form-control">
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    <label for="email_edit">Email</label>
-                                    <input required type="email" id="email_edit" name="email_edit"
-                                        class="form-control">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email_edit" name="email" class="form-control">
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    <label for="jenis_kelamin_edit">Jenis Kelamin</label>
-                                    <select required name="jenis_kelamin_edit" id="jenis_kelamin_edit"
-                                        class="form-control select2">
+                                    <label for="jenis_kelami">Jenis Kelamin</label>
+                                    <select name="jenis_kelamin" id="jenis_kelamin_edit" class="form-control select2">
                                         <option disabled selected="">- PILIH JENIS KELAMIN -</option>
                                         <option value="Laki-Laki">Laki-Laki</option>
                                         <option value="Perempuan">Perempuan</option>
