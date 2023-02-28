@@ -68,8 +68,9 @@
                         <i class="fas fa-plug"></i><span>Petugas</span></a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link"><i class="fas fa-plug"></i>
-                        <span>Periode</span></a>
+                    <a href="{{ route('periode.index') }}"
+                        class="nav-link {{ Request::segment(2) == 'periode' ? 'active' : '' }}">
+                        <i class="fas fa-plug"></i><span>Periode</span></a>
                 </li>
                 {{-- End Manajemen Data --}}
 
@@ -96,7 +97,7 @@
                 {{-- Start Role Permission --}}
                 <li class="menu-header">Role</li>
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link"><i class="far fa-user"></i>
+                    <a href="{{ route('roles.index') }}" class="nav-link"><i class="far fa-user"></i>
                         <span>List Role</span></a>
                 </li>
                 <li class="nav-item dropdown">

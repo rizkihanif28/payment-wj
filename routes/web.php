@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\Admin\KelasController;
+use App\Http\Controllers\Admin\PeriodeController;
 use App\Http\Controllers\Admin\PetugasController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\RoleListController;
 use App\Http\Controllers\Admin\SiswaController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\DashboardController;
@@ -60,6 +63,14 @@ Route::prefix('admin')
             Route::get('kelas/{id}/edit', [KelasController::class, 'edit'])->name('kelas.edit');
             Route::post('kelas/{id}/update', [KelasController::class, 'update'])->name('kelas.update');
             Route::delete('kelas/{id}/delete', [KelasController::class, 'destroy'])->name('kelas.delete');
+            // Periode
+            Route::get('periode', [PeriodeController::class, 'index'])->name('periode.index');
+            Route::post('periode/store', [PeriodeController::class, 'store'])->name('periode.store');
+            Route::get('periode/{id}/edit', [PeriodeController::class, 'edit'])->name('periode.edit');
+            Route::post('periode/{id}/update', [PeriodeController::class, 'update'])->name('periode.update');
+            Route::delete('periode/{id}/delete', [PeriodeController::class, 'destroy'])->name('periode.delete');
+            // List Role
+            Route::get('roles', [RoleController::class, 'index'])->name('roles.index');
         });
     });
 
