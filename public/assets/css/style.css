@@ -836,7 +836,7 @@ select.form-control:not([size]):not([multiple]) {
     width: 100%;
     min-height: 70px;
     padding: 15px 25px;
-    display: flex;
+    display: inline;
     align-items: center;
 }
 .card .card-header .btn {
@@ -4159,4 +4159,23 @@ body:not(.sidebar-mini)
         -webkit-transform: scale(1.2, 1.2);
         opacity: 0;
     }
+}
+
+/* New CSS personal */
+/* .form-group .select2 select {
+    background-color: blue;
+} */
+
+#form-permission
+    .select2-container--default
+    .select2-selection--multiple
+    .select2-selection__choice {
+    background-color: #6777ef;
+    font-weight: 400;
+}
+#form-permission
+    .select2-container--default
+    .select2-selection--multiple
+    .select2-selection__choice__remove {
+    color: white;
 }

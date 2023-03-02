@@ -34,7 +34,7 @@
                                     <td>{{ $item->name }}</td>
                                     <td>
                                         <div class="row mx-auto">
-                                            <a href="{{ route('role-permission.create', $row->id) }}"
+                                            <a href="{{ route('role-permission.create', $item->id) }}"
                                                 class="btn btn-primary btn-sm">
                                                 <i class="fas fa-edit fa-fw"></i> Handle
                                             </a>
@@ -60,8 +60,19 @@
     <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-    {{-- Sweetalert 2 --}}
-    <script type="text/javascript" src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
     {{-- Select2 --}}
     <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
+    <script>
+        $(function() {
+            $("#dataTable2").DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true
+            });
+        });
+    </script>
 @endpush

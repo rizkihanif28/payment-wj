@@ -97,12 +97,25 @@
                 {{-- Start Role Permission --}}
                 <li class="menu-header">Role</li>
                 <li class="nav-item dropdown">
-                    <a href="{{ route('roles.index') }}" class="nav-link"><i class="far fa-user"></i>
+                    <a href="{{ route('roles.index') }}"
+                        class="nav-link {{ Request::segment(2) == 'role' ? 'active' : '' }}"><i class="far fa-user"></i>
                         <span>List Role</span></a>
                 </li>
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link"><i class="far fa-user"></i>
                         <span>User Role</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="{{ route('permission.index') }}"
+                        class="nav-link {{ Request::segment(2) == 'permission' ? 'active' : '' }}"><i
+                            class="far fa-user"></i>
+                        <span>Permission List</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="{{ route('role-permission.index') }}"
+                        class="nav-link {{ Request::segment(2) == 'role-permission' ? 'active' : '' }}"><i
+                            class="far fa-user"></i>
+                        <span>Role Permission</span></a>
                 </li>
             @endrole
             @role('petugas')

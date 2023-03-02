@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
 
     <!-- Template CSS -->
-    <link rel="stylesheet" href='../assets/css/style.css' />
-    <link rel="stylesheet" href='../assets/css/components.css'>
+    <link rel="stylesheet" href='/assets/css/style.css' />
+    <link rel="stylesheet" href='/assets/css/components.css'>
     @stack('css')
 </head>
 
@@ -59,13 +59,13 @@
     <script src="{{ asset('plugins/bootstrap4/js/bootstrap.bundle.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="../assets/js/stisla.js"></script>
+    <script src="/assets/js/stisla.js"></script>
 
     <!-- JS Libraies -->
 
     <!-- Template JS File -->
-    <script src="../assets/js/scripts.js"></script>
-    <script src="../assets/js/custom.js"></script>
+    <script src="/assets/js/scripts.js"></script>
+    <script src="/assets/js/custom.js"></script>
 
     <script>
         $.ajaxSetup({

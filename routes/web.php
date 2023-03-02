@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\Admin\KelasController;
 use App\Http\Controllers\Admin\PeriodeController;
+use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\PetugasController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\RoleListController;
+use App\Http\Controllers\Admin\RolePermissionController;
 use App\Http\Controllers\Admin\SiswaController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\DashboardController;
@@ -69,6 +71,12 @@ Route::prefix('admin')
             Route::get('periode/{id}/edit', [PeriodeController::class, 'edit'])->name('periode.edit');
             Route::post('periode/{id}/update', [PeriodeController::class, 'update'])->name('periode.update');
             Route::delete('periode/{id}/delete', [PeriodeController::class, 'destroy'])->name('periode.delete');
+            // Permission List
+            Route::get('permission', [PermissionController::class, 'index'])->name('permission.index');
+            // Role Permission
+            Route::get('role-permission', [RolePermissionController::class, 'index'])->name('role-permission.index');
+            Route::get('role-permission/create/{id}', [RolePermissionController::class, 'create'])->name('role-permission.create');
+            Route::post('role-permission/store/{id}', [RolePermissionController::class, 'store'])->name('role-permission.store');
             // List Role
             Route::get('roles', [RoleController::class, 'index'])->name('roles.index');
         });
