@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\DataTables\PermissionDataTable;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
@@ -27,10 +28,10 @@ class PermissionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
+    // public function create()
+    // {
+    //     return view('admin/permission/create')
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -40,7 +41,17 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        foreach ($request->name as $name) {
+            Permission::create(['name' => $name]);
+        }
+        // $validator = Validator::make($request->all(), [
+        //     'name' => ''
+        // ]);
+        // if ($validator->fails()) {
+        //     return response()->json(['error' => $validator->errors()->all()]);
+        // }
+        // Permission::create($request->all());
+        return response()->json(['message' => 'Permission berhasil ditambahkan']);
     }
 
     /**

@@ -73,6 +73,7 @@ Route::prefix('admin')
             Route::delete('periode/{id}/delete', [PeriodeController::class, 'destroy'])->name('periode.delete');
             // Permission List
             Route::get('permission', [PermissionController::class, 'index'])->name('permission.index');
+            Route::post('permission/store', [PermissionController::class, 'store'])->name('permission.store');
             // Role Permission
             Route::get('role-permission', [RolePermissionController::class, 'index'])->name('role-permission.index');
             Route::get('role-permission/create/{id}', [RolePermissionController::class, 'create'])->name('role-permission.create');

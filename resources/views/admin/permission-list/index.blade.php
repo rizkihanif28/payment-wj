@@ -7,9 +7,6 @@
     <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     {{-- Sweetalert 2 --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('plugins/sweetalert2/sweetalert2.min.css') }}">
-    {{-- Select2 --}}
-    <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.css') }}">
 @endpush
 
 @section('content')
@@ -18,7 +15,10 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-
+                    <a href="javascript:void(0)" class="btn btn-primary btn-sm" data-toggle="modal"
+                        data-target="#createModal">
+                        <i class="fas fa-plus fa-fw"></i> Tambah Data
+                    </a>
                 </div>
                 {{-- card-header --}}
                 <div class="card-body">
@@ -67,9 +67,8 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label for="nama_permission">Nama Permission</label>
-                                    <input required type="text" id="nama_permission" name="nama_permission"
-                                        class="form-control">
+                                    <label for="name">Permission</label>
+                                    <input required type="text" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -122,3 +121,15 @@
     </div>
     {{-- end modal edit --}}
 @endsection
+
+@push('customJS')
+    {{-- Plugin & Datatables  --}}
+    <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+    {{-- Sweetalert 2 --}}
+    <script type="text/javascript" src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+
+    @include('admin/permission-list/ajax')
+@endpush

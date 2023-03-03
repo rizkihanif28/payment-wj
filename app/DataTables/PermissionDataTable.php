@@ -9,7 +9,7 @@ class PermissionDataTable
 {
     public function data()
     {
-        $data = Permission::latest();
+        $data = Permission::oldest();
         return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
