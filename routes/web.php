@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\RoleListController;
 use App\Http\Controllers\Admin\RolePermissionController;
 use App\Http\Controllers\Admin\SiswaController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\UserPermissionController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Models\Petugas;
@@ -78,6 +79,10 @@ Route::prefix('admin')
             Route::get('role-permission', [RolePermissionController::class, 'index'])->name('role-permission.index');
             Route::get('role-permission/create/{id}', [RolePermissionController::class, 'create'])->name('role-permission.create');
             Route::post('role-permission/store/{id}', [RolePermissionController::class, 'store'])->name('role-permission.store');
+            // User Permission
+            Route::get('user-permission', [UserPermissionController::class, 'index'])->name('user-permission.index');
+            Route::get('user-permission/create/{id}', [UserPermissionController::class, 'create'])->name('user-permission.create');
+            Route::post('user-permission/store/{id}', [UserPermissionController::class, 'store'])->name('user-permission.store');
             // List Role
             Route::get('roles', [RoleController::class, 'index'])->name('roles.index');
         });

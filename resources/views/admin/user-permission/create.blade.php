@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Role Permission')
+@section('title', 'User Permission')
 
 @push('css')
     {{-- Select2 --}}
@@ -13,23 +13,23 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <a href="{{ route('role-permission.index') }}" class="btn btn-danger btn-sm">
+                    <a href="{{ route('user-permission.index') }}" class="btn btn-danger btn-sm">
                         <i class="fas fa-window-close fa-fw"></i>BACK
                     </a>
                     <a href="javascript:void(0)" class="btn btn-primary btn-sm">
-                        <i class="fas fa-user-tie fa-fw"></i>Role : {{ $role->name }}
+                        <i class="fas fa-user-tie fa-fw"></i>Username: {{ $users->username }}
                     </a>
                 </div>
                 {{-- card header --}}
                 <div class="card-body">
-                    <form method="POST" action="{{ route('role-permission.store', $role->id) }}">
+                    <form method="POST" action="{{ route('user-permission.store', $users->id) }}">
                         @csrf
                         <div class="form-group select2-purple" id="form-permission">
                             <label style="font-size: 18px">Permission</label>
                             <select name="permission[]" class="select2" multiple data-dropdown-css-class="select2-purple"
                                 data-placeholder="Select a Permission" style="width: 100%;">
                                 @foreach ($permission as $item)
-                                    @if ($role->hasAnyPermission($item->name))
+                                    @if ($users->hasAnyPermission($item->name))
                                         <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
                                     @else
                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -47,7 +47,6 @@
             </div>
         </div>
     </div>
-
 @endsection
 
 @push('customJS')

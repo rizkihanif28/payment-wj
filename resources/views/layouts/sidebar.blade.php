@@ -112,6 +112,12 @@
                         <span>Permission List</span></a>
                 </li>
                 <li class="nav-item dropdown">
+                    <a href="{{ route('user-permission.index') }}"
+                        class="nav-link {{ Request::segment(2) == 'user-permission' ? 'active' : '' }}"><i
+                            class="far fa-user"></i>
+                        <span>User Permission</span></a>
+                </li>
+                <li class="nav-item dropdown">
                     <a href="{{ route('role-permission.index') }}"
                         class="nav-link {{ Request::segment(2) == 'role-permission' ? 'active' : '' }}"><i
                             class="far fa-user"></i>

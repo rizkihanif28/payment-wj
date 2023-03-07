@@ -2,25 +2,22 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\DataTables\PermissionDataTable;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Permission;
 
-class PermissionController extends Controller
+class UserPermissionController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, PermissionDataTable $datatable)
+    public function index()
     {
-        if ($request->ajax()) {
-            return $datatable->data();
-        }
-        return view('admin/permission-list/index');
+        $users = User::all();
+        return view('admin/user-permission/index', compact('users'));
     }
 
     /**
@@ -28,10 +25,12 @@ class PermissionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function create()
-    // {
-    //     return view('admin/permission/create')
-    // }
+    public function create($id)
+    {
+        $users = User::findOrFail($id);
+        $permission = Permission::all();
+        return view('admin/user-permission/create', compact('users', 'permission'));
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -39,12 +38,13 @@ class PermissionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        foreach ($request->name as $name) {
-            Permission::create(['name' => $name]);
-        }
-        return response()->json(['message' => 'Permission berhasil ditambahkan']);
+        $user = User::findOrFail($id);
+        $user->syncPermission($request->permission);
+
+        return redirect()->route('user-permission/index')
+            ->with('success', 'Permission untuk username : ' . $user->username . 'berhasil disimpan!');
     }
 
     /**
