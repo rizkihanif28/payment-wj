@@ -50,7 +50,7 @@
     {{-- modal-create --}}
     <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Tambah Data</h5>
@@ -59,25 +59,37 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form id="store">
-                    <div class="modal-body">
-                        <div class="alert alert-danger print-error-msg" style="display: none;">
-                            <ul></ul>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label for="name">Permission</label>
-                                    <input required type="text" class="form-control">
-                                </div>
-                            </div>
-                        </div>
+                <div class="modal-body">
+
+                    <div class="table-responsive">
+                        <form id="store">
+                            <span id="result"></span>
+                            <table class="table table-bordered table-striped" id="user_table">
+                                <thead>
+                                    <tr>
+                                        <th width="35%">Permission</th>
+                                        <th width="30%">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{-- Js dinamis ajax --}}
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="1" align="right">&nbsp;</td>
+                                        <td>
+                                            <button type="submit" class="btn btn-primary"><i class="fas fa-save fa-fw"></i>
+                                                SIMPAN</button>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </form>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save</button>
-                    </div>
-                </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
@@ -103,10 +115,9 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label for="nama_permission_edit">Nama Kelas</label>
+                                    <label for="name_edit">Permission Name</label>
                                     <input type="hidden" name="id" id="id_edit" class="form-control" readonly>
-                                    <input required type="text" name="nama_permission" id="nama_permission_edit"
-                                        class="form-control">
+                                    <input required type="text" name="name" id="name_edit" class="form-control">
                                 </div>
                             </div>
                         </div>

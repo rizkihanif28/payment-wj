@@ -75,6 +75,9 @@ Route::prefix('admin')
             // Permission List
             Route::get('permission', [PermissionController::class, 'index'])->name('permission.index');
             Route::post('permission/store', [PermissionController::class, 'store'])->name('permission.store');
+            Route::get('permission/{id}/edit', [PermissionController::class, 'edit'])->name('permission.edit');
+            Route::post('permission/{id}/update', [PermissionController::class, 'update'])->name('permission.update');
+            Route::delete('permission/{id}/delete', [PermissionController::class, 'destroy'])->name('permission.delete');
             // Role Permission
             Route::get('role-permission', [RolePermissionController::class, 'index'])->name('role-permission.index');
             Route::get('role-permission/create/{id}', [RolePermissionController::class, 'create'])->name('role-permission.create');

@@ -41,21 +41,10 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        foreach ($request->name as $name) {
+        foreach (($request->name) as $name) {
             Permission::create(['name' => $name]);
         }
-        return response()->json(['message' => 'Permission berhasil ditambahkan']);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        return response()->json(['message' => 'Permission berhasil ditambahkan!']);
     }
 
     /**
@@ -66,7 +55,8 @@ class PermissionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $permission = Permission::findOrFail($id);
+        return response()->json(['data' => $permission]);
     }
 
     /**
@@ -78,7 +68,8 @@ class PermissionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Permission::findOrFail($id)->update($request->all());
+        return response()->json(['message' => 'Data berhasil diubah!']);
     }
 
     /**
@@ -89,6 +80,7 @@ class PermissionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Permission::findOrFail($id)->delete();
+        return response()->json(['message' => 'Data berhasil dihapus!']);
     }
 }
