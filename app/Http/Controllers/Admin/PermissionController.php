@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\DataTables\PermissionDataTable;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
@@ -41,7 +40,7 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        foreach (($request->name) as $name) {
+        foreach ($request->name ?? [] as $name) {
             Permission::create(['name' => $name]);
         }
         return response()->json(['message' => 'Permission berhasil ditambahkan!']);

@@ -26,26 +26,52 @@
     }
 
     // create permission
+
+    // form post dynamic field
+    var count = 1;
+    dynamic_field(count);
+
+    function dynamic_field(number) {
+        html = '<tr>';
+        html += '<td><input type="text" required id="tag" name="[]" class="form-control"/></td>';
+        if (number > 1) {
+            html +=
+                '<td><button type="button" name="remove" id="" class="btn btn-danger remove"><i class="fas fa-window-close fa-fw"></i> REMOVE</button></td></tr>';
+            $('tbody').append(html);
+        } else {
+            html +=
+                '<td><button type="button" name="add" id="add" class="btn btn-success"><i class="fas fa-plus fa-fw"></i> ADD</button></td></tr>';
+            $('tbody').html(html);
+        }
+    }
+
+    $(document).on('click', '#add', function() {
+        count++;
+        dynamic_field(count);
+    });
+
+    $(document).on('click', '.remove', function() {
+        count--;
+        $(this).closest("tr").remove();
+    });
+
+    // post form 
     $("#store").on('submit', function(e) {
         e.preventDefault()
         $.ajax({
-            type: "POST",
             url: "{{ route('permission.store') }}",
+            type: "POST",
             data: $(this).serialize(),
             success: function(response) {
                 resetForm()
                 dynamic_field(1);
-                if ($.isEmptyObject(response.error)) {
-                    $("#createModal").modal("hide")
-                    $("#dataTable2").DataTable().ajax.reload()
-                    Swal.fire(
-                        '',
-                        response.message,
-                        'success'
-                    )
-                } else {
-                    printErrorMsg(response.error)
-                }
+                $("#createModal").modal("hide")
+                $("#dataTable2").DataTable().ajax.reload()
+                Swal.fire(
+                    '',
+                    response.message,
+                    'success'
+                )
             }
         })
     })
@@ -70,6 +96,15 @@
                 $("#name_edit").val(response.data.name)
                 $("#editModal").modal("show")
 
+            },
+            error: function(err) {
+                if (err.status == 403) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Uups ...',
+                        text: 'Not Allowed!'
+                    })
+                }
             }
         })
     })
@@ -84,7 +119,7 @@
             data: $(this).serialize(),
             success: function(response) {
                 if ($.isEmptyObject(response.error)) {
-                    $("#createModal").modal("hide")
+                    $("#editModal").modal("hide")
                     $("#dataTable2").DataTable().ajax.reload()
                     Swal.fire(
                         '',
@@ -135,32 +170,4 @@
             }
         })
     })
-
-    // form tambah dinamis
-    var count = 1;
-    dynamic_field(count);
-
-    function dynamic_field(number) {
-        html = '<tr>';
-        html += '<td><input type="text" required id="tag" name="[]" class="form-control"/></td>';
-        if (number > 1) {
-            html +=
-                '<td><button type="button" name="remove" id="" class="btn btn-danger remove"><i class="fas fa-window-close fa-fw"></i> REMOVE</button></td></tr>';
-            $('tbody').append(html);
-        } else {
-            html +=
-                '<td><button type="button" name="add" id="add" class="btn btn-success"><i class="fas fa-plus fa-fw"></i> ADD</button></td></tr>';
-            $('tbody').html(html);
-        }
-    }
-
-    $(document).on('click', '#add', function() {
-        count++;
-        dynamic_field(count);
-    });
-
-    $(document).on('click', '.remove', function() {
-        count--;
-        $(this).closest("tr").remove();
-    });
 </script>

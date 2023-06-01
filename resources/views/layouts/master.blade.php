@@ -42,11 +42,12 @@
         </div>
         <footer class="main-footer">
             <div class="footer-left">
-                Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="https://nauval.in/">Muhamad
-                    Nauval Azhar</a>
+                Copyright &copy; 2023 <div class="bullet"></div> Created With <a
+                    href="https://www.linkedin.com/in/rizki-hanif/">Mohamad Rizki
+                    Hanif</a>
             </div>
             <div class="footer-right">
-                2.3.0
+                SMK Walang Jaya
             </div>
         </footer>
     </div>
@@ -62,6 +63,7 @@
     <script src="/assets/js/stisla.js"></script>
 
     <!-- JS Libraies -->
+    {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
 
     <!-- Template JS File -->
     <script src="/assets/js/scripts.js"></script>

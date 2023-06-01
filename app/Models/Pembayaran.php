@@ -12,7 +12,7 @@ class Pembayaran extends Model
 {
     use HasFactory;
 
-    protected $table = 'pembayaran';
+    protected $table = 'pembayarans';
 
     protected $fillable = [
         'kode_pembayaran ',

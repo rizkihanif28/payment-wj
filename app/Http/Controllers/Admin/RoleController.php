@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\DataTables\RoleDataTable;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
@@ -22,16 +24,6 @@ class RoleController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -39,7 +31,12 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        foreach ($request->name as $name) {
+            Role::create([
+                'name' => $name
+            ]);
+        }
+        return response()->json(['message' => 'Role berhasil ditambahkan!']);
     }
 
     /**
@@ -48,10 +45,11 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-    }
+    // public function show($id)
+    // {
+    //     $role = Role::findOrFail($id);
+    //     return view('admin/roles/show', compact('role'));
+    // }
 
     /**
      * Show the form for editing the specified resource.
@@ -61,7 +59,8 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $role = Role::findOrFail($id);
+        return response()->json(['data' => $role]);
     }
 
     /**
@@ -73,7 +72,8 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Role::findOrFail($id)->update($request->all());
+        return response()->json(['message' => 'Role berhasil diubah!']);
     }
 
     /**
@@ -84,6 +84,7 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Role::findOrFail($id)->delete();
+        return response()->json(['message' => 'Role berhasil dihapus!']);
     }
 }

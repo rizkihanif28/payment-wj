@@ -5,13 +5,13 @@ use App\Http\Controllers\Admin\PeriodeController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\PetugasController;
 use App\Http\Controllers\Admin\RoleController;
-use App\Http\Controllers\Admin\RoleListController;
 use App\Http\Controllers\Admin\RolePermissionController;
 use App\Http\Controllers\Admin\SiswaController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\UserPermissionController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PembayaranController;
 use App\Models\Petugas;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +34,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('home', [HomeController::class, 'index'])->name('home');
 });
 
+Route::prefix('pembayaran')->middleware(['auth', 'role:admin|petugas'])->group(function () {
+    Route::get('/', [PembayaranController::class, 'index'])->name('pembayaran.index');
+    Route::get('bayar/{nisn}', [PembayaranController::class, 'formBayar'])->name('pembayaran.bayar');
+});
+
 Route::prefix('admin')
     ->namespace('Admin')
     ->middleware(['auth'])
@@ -52,6 +57,26 @@ Route::prefix('admin')
             Route::get('petugas/{id}/edit', [PetugasController::class, 'edit'])->name('petugas.edit');
             Route::post('petugas/{id}/update', [PetugasController::class, 'update'])->name('petugas.update');
             Route::delete('petugas/{id}/delete', [PetugasController::class, 'destroy'])->name('petugas.delete');
+            // Permission List
+            Route::get('permission', [PermissionController::class, 'index'])->name('permission.index');
+            Route::post('permission/store', [PermissionController::class, 'store'])->name('permission.store');
+            Route::get('permission/{id}/edit', [PermissionController::class, 'edit'])->name('permission.edit');
+            Route::post('permission/{id}/update', [PermissionController::class, 'update'])->name('permission.update');
+            Route::delete('permission/{id}/delete', [PermissionController::class, 'destroy'])->name('permission.delete');
+            // Role Permission
+            Route::get('role-permission', [RolePermissionController::class, 'index'])->name('role-permission.index');
+            Route::get('role-permission/create/{id}', [RolePermissionController::class, 'create'])->name('role-permission.create');
+            Route::post('role-permission/store/{id}', [RolePermissionController::class, 'store'])->name('role-permission.store');
+            // User Permission
+            Route::get('user-permission', [UserPermissionController::class, 'index'])->name('user-permission.index');
+            Route::get('user-permission/create/{id}', [UserPermissionController::class, 'create'])->name('user-permission.create');
+            Route::post('user-permission/store/{id}', [UserPermissionController::class, 'store'])->name('user-permission.store');
+            // List Role
+            Route::get('roles', [RoleController::class, 'index'])->name('roles.index');
+            Route::post('roles/store', [RoleController::class, 'store'])->name('roles.store');
+            Route::get('roles/{id}/edit', [RoleController::class, 'edit'])->name('roles.edit');
+            Route::post('roles/{id}/update', [RoleController::class, 'update'])->name('roles.update');
+            Route::delete('roles/{id}/delete', [RoleController::class, 'destroy'])->name('roles.delete');
         });
         Route::middleware(['role:admin|petugas'])->group(function () {
             // Siswa
@@ -72,22 +97,8 @@ Route::prefix('admin')
             Route::get('periode/{id}/edit', [PeriodeController::class, 'edit'])->name('periode.edit');
             Route::post('periode/{id}/update', [PeriodeController::class, 'update'])->name('periode.update');
             Route::delete('periode/{id}/delete', [PeriodeController::class, 'destroy'])->name('periode.delete');
-            // Permission List
-            Route::get('permission', [PermissionController::class, 'index'])->name('permission.index');
-            Route::post('permission/store', [PermissionController::class, 'store'])->name('permission.store');
-            Route::get('permission/{id}/edit', [PermissionController::class, 'edit'])->name('permission.edit');
-            Route::post('permission/{id}/update', [PermissionController::class, 'update'])->name('permission.update');
-            Route::delete('permission/{id}/delete', [PermissionController::class, 'destroy'])->name('permission.delete');
-            // Role Permission
-            Route::get('role-permission', [RolePermissionController::class, 'index'])->name('role-permission.index');
-            Route::get('role-permission/create/{id}', [RolePermissionController::class, 'create'])->name('role-permission.create');
-            Route::post('role-permission/store/{id}', [RolePermissionController::class, 'store'])->name('role-permission.store');
-            // User Permission
-            Route::get('user-permission', [UserPermissionController::class, 'index'])->name('user-permission.index');
-            Route::get('user-permission/create/{id}', [UserPermissionController::class, 'create'])->name('user-permission.create');
-            Route::post('user-permission/store/{id}', [UserPermissionController::class, 'store'])->name('user-permission.store');
-            // List Role
-            Route::get('roles', [RoleController::class, 'index'])->name('roles.index');
+            // Pembayaran
+            // Route::get('pembayaran', [PembayaranController::class, 'index'])->name('pembayaran.index');
         });
     });
 

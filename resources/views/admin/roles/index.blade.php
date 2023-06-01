@@ -53,7 +53,7 @@
     {{-- modal create --}}
     <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Tambah Data</h5>
@@ -62,26 +62,56 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form id="store">
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <form id="store">
+                            <span id="result"></span>
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th width="60%">Permission</th>
+                                        <th width="50%">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{-- Field dynamic form post --}}
+                                </tbody>
+                                <tfoot>
+                                    <td colspan="1" align="right">&nbsp;</td>
+                                    <td>
+                                        <button type="submit" class="btn btn-primary"><i class="fas fa-save fa-fw"></i>
+                                            Simpan</button>
+                                    </td>
+                                </tfoot>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- end modal create --}}
+
+    {{-- edit modal  --}}
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Data</h5>
+                    <hr>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="update">
                     <div class="modal-body">
-                        <div class="alert alert-danger print-error-msg" style="display: none;">
-                            <ul></ul>
-                        </div>
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label for="nama_kelas_create">Nama Kelas</label>
-                                    <input required type="text" id="nama_kelas_create" name="nama_kelas"
-                                        class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <select>
-                                        <option value=""></option>
-                                    </select>
+                                    <label for="name_edit">Nama Role</label>
+                                    <input type="hidden" name="id" id="id_edit" class="form-control" readonly>
+                                    <input required type="" name="name" id="name_edit" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -94,7 +124,8 @@
             </div>
         </div>
     </div>
-    {{-- end modal create --}}
+    {{-- end edit modal  --}}
+
 @endsection
 @push('customJS')
     {{-- Plugin & Datatables  --}}

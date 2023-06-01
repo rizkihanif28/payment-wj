@@ -72,7 +72,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {{-- Js dinamis ajax --}}
+                                    {{-- Field dynamic form post --}}
                                 </tbody>
                                 <tfoot>
                                     <tr>
