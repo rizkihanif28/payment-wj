@@ -14,6 +14,7 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href='/assets/css/style.css' />
     <link rel="stylesheet" href='/assets/css/components.css'>
+
     @stack('css')
 </head>
 
@@ -42,7 +43,7 @@
         </div>
         <footer class="main-footer">
             <div class="footer-left">
-                Copyright &copy; 2023 <div class="bullet"></div> Created With <a
+                Copyright &copy; {{ date('Y') }} <div class="bullet"></div> Created With <a
                     href="https://www.linkedin.com/in/rizki-hanif/">Mohamad Rizki
                     Hanif</a>
             </div>
@@ -63,7 +64,6 @@
     <script src="/assets/js/stisla.js"></script>
 
     <!-- JS Libraies -->
-    {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
 
     <!-- Template JS File -->
     <script src="/assets/js/scripts.js"></script>

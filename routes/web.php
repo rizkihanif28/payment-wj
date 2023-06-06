@@ -36,7 +36,10 @@ Route::middleware(['auth'])->group(function () {
 
 Route::prefix('pembayaran')->middleware(['auth', 'role:admin|petugas'])->group(function () {
     Route::get('/', [PembayaranController::class, 'index'])->name('pembayaran.index');
-    Route::get('bayar/{nisn}', [PembayaranController::class, 'formBayar'])->name('pembayaran.bayar');
+    Route::get('form/{nisn}', [PembayaranController::class, 'formBayar'])->name('pembayaran.form');
+    Route::get('spp/{tahun}', [PembayaranController::class, 'periode'])->name('pembayaran.spp');
+    Route::post('post/{nisn}', [PembayaranController::class, 'bayarValidate'])->name('pembayaran.post');
+    Route::get('history-pembayaran', [PembayaranController::class, 'bayarHistory'])->name('pembayaran.history-pembayaran');
 });
 
 Route::prefix('admin')

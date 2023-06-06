@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Siswa;
 use App\Models\Petugas;
 use App\Models\Periode;
+use Carbon\Carbon;
 
 class Pembayaran extends Model
 {
@@ -15,7 +16,7 @@ class Pembayaran extends Model
     protected $table = 'pembayarans';
 
     protected $fillable = [
-        'kode_pembayaran ',
+        'kode_pembayaran',
         'petugas_id',
         'siswa_id',
         'nisn',
@@ -24,6 +25,16 @@ class Pembayaran extends Model
         'tahun_bayar',
         'jumlah_bayar',
     ];
+
+    public function getTanggalAttribute($value)
+    {
+        return Carbon::parse($value)->format('d-m-Y');
+    }
+
+    public function getJumlahBayarAttribute($value)
+    {
+        return "Rp " . number_format($value, 0, 2, '.');
+    }
 
     public function siswa()
     {

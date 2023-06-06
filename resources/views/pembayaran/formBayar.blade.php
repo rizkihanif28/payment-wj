@@ -1,14 +1,14 @@
 @extends('layouts.master')
+{{-- @extends('layouts.app') --}}
 @section('title', 'Form Pembayaran')
 
-@section('css')
+@push('css')
     {{-- Select2 --}}
     <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
-    {{-- <link rel="stylesheet" href="{{ asset('assets/templates/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
-@endsection
+    <link rel="stylesheet" href="{{ asset('plugins/bootstrap5/select2-bootstrap-5-theme.min.css') }}">
+    {{-- Sweetalert 2 --}}
+    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/sweetalert2/sweetalert2.min.css') }}">
+@endpush
 
 @section('content')
     <x-alert></x-alert>
@@ -25,7 +25,7 @@
                 </div>
                 {{-- card header --}}
                 <div class="card-body">
-                    <form method="POST" action="#">
+                    <form method="POST" action="{{ route('pembayaran.post', $siswa->nisn) }}">
                         @csrf
                         <div class="row">
                             <div class="col-lg-3">
@@ -75,31 +75,31 @@
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label for="tahun_bayar">Periode</label>
-                                    <select class="select2 form-control" name="tahun_bayar" id="tahun_bayar" required>
-                                        <option>--PILIH PERIODE--</option>
-                                        @foreach ($periode as $item)
-                                            <option value="{{ $item->tahun }}">{{ $item->tahun }}</option>
+                                    <select required="" name="tahun_bayar" id="tahun_bayar"
+                                        class="form-control select2bs5">
+                                        <option disabled="" selected="">- PILIH TAHUN -</option>
+                                        @foreach ($periode as $row)
+                                            <option value="{{ $row->tahun }}">{{ $row->tahun }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
-                            {{-- <div class="col-lg-3">
+                            <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label for="jumlah_bayar">Nominal</label>
-                                    <input required type="" name="nominal" readonly id="nominal"
-                                        class="form-control">
-                                    <input required type="hidden" name="jumlah_bayar" readonly id="jumlah_bayar"
-                                        class="form-control">
+                                    <label for="jumlah_bayar" id="nominal_spp_label">Nominal Spp</label>
+                                    <input type="" name="nominal" readonly="" id="nominal" class="form-control">
+                                    <input required="" type="hidden" name="jumlah_bayar" readonly=""
+                                        id="jumlah_bayar" class="form-control">
                                     @error('jumlah_bayar')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-                            </div> --}}
-                            <div class="col-lg-3">
+                            </div>
+                            <div class="col-lg-3 mb-3">
                                 <div class="form-group">
                                     <label for="bulan_bayar">Bulan</label>
-                                    <select required name="bulan_bayar[]" id="bulan_bayar" class="select2"
-                                        multiple="multiple" data-placeholder="Pilih Bulan" style="width: 100%">
+                                    <select required="" name="bulan_bayar[]" id="bulan_bayar" class="select2"
+                                        data-placeholder="-PILIH BULAN-" multiple="multiple">
                                         @foreach (Universe::bulanAll() as $bulan)
                                             <option value="{{ $bulan['nama_bulan'] }}">{{ $bulan['nama_bulan'] }}
                                             </option>
@@ -128,11 +128,61 @@
 @endsection
 
 @push('customJS')
-    <script src="{{ asset('plugins/select2/js/select2.min.js') }}"></script>
-
+    {{-- Select2  --}}
+    <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
+    {{-- Sweetalert 2 --}}
+    <script type="text/javascript" src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
     <script>
         $(document).ready(function() {
-            $('.select2').select2({});
+            // Initialize class select2
+            $('.select2').select2({
+                theme: "bootstrap-5",
+                closeOnSelect: false,
+
+            });
+            //Initialize class Select2bs5
+            $('.select2bs5').select2({
+                theme: 'bootstrap-5'
+            })
+
+            function rupiah(number) {
+                const formatter = new Intl.NumberFormat('ID', {
+                    style: 'currency',
+                    currency: 'idr',
+                })
+
+                return formatter.format(number)
+            }
+
+
+            $(document).on("change", "#tahun_bayar", function() {
+                var tahun = $(this).val()
+
+                $.ajax({
+                    url: '/pembayaran/spp/' + tahun,
+                    method: "GET",
+                    success: function(response) {
+                        $("#nominal_spp_label").html(`Nominal Spp Tahun ` + tahun + ':')
+                        $("#nominal").val(response.nominal_rupiah)
+                        $("#jumlah_bayar").val(response.data.nominal)
+                    }
+                })
+            })
+
+            $(document).on("change", "#bulan_bayar", function() {
+                var bulan = $(this).val()
+                var total_bulan = bulan.length
+                var total_bayar = $("#jumlah_bayar").val()
+                var hasil_bayar = (total_bulan * total_bayar)
+
+                var formatter = new Intl.NumberFormat('ID', {
+                    style: 'currency',
+                    currency: 'idr',
+                })
+
+                $("#total_bayar").val(formatter.format(hasil_bayar))
+            })
+
         });
     </script>
 @endpush

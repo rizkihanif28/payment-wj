@@ -71,7 +71,9 @@
                         <span>Status Pembayaran</span></a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link"><i class="far fa-user"></i>
+                    <a href="{{ route('pembayaran.history-pembayaran') }}"
+                        class="nav-link {{ Request::segment(2) == 'history-pembayaran' ? 'active' : '' }}"><i
+                            class="far fa-user"></i>
                         <span>Histori Pembayaran</span></a>
                 </li>
                 <li class="nav-item dropdown">
