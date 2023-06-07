@@ -5,9 +5,7 @@
 @push('css')
     {{-- Select2 --}}
     <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('plugins/bootstrap5/select2-bootstrap-5-theme.min.css') }}">
-    {{-- Sweetalert 2 --}}
-    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/sweetalert2/sweetalert2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap5/select2-bootstrap-5-theme.min.css') }}">
 @endpush
 
 @section('content')
@@ -130,8 +128,7 @@
 @push('customJS')
     {{-- Select2  --}}
     <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
-    {{-- Sweetalert 2 --}}
-    <script type="text/javascript" src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+
     <script>
         $(document).ready(function() {
             // Initialize class select2

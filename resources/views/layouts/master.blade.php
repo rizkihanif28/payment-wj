@@ -8,6 +8,7 @@
     <title>@yield('title') | {{ config('app.name') }}</title>
 
     {{-- General CSS File --}}
+    {{-- <link rel="stylesheet" href="{{ asset('plugins/bootstrap4/css/bootstrap.min.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('plugins/bootstrap4/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
 

@@ -728,10 +728,17 @@ select.form-control:not([size]):not([multiple]) {
     color: #fff;
 }
 
+/* alert custom from bootstrap */
+.alert-dismissible .close {
+    color: #ffffff;
+    padding-right: 2rem;
+}
+
 /* 3.4 Alert */
 .alert {
     color: #fff;
     border: none;
+    font-weight: 500;
     padding: 15px 20px;
 }
 .alert .alert-title {
@@ -4162,11 +4169,9 @@ body:not(.sidebar-mini)
     }
 }
 
-/* New CSS personal */
-/* .form-group .select2 select {
-    background-color: blue;
-} */
+/* 6. New CSS personal */
 
+/* 6.1 form permission */
 #form-permission
     .select2-container--default
     .select2-selection--multiple
@@ -4179,4 +4184,69 @@ body:not(.sidebar-mini)
     .select2-selection--multiple
     .select2-selection__choice__remove {
     color: white;
+}
+
+/* 6.2 callout */
+@supports not (-webkit-touch-callout: none) {
+    .layout-fixed .wrapper .sidebar {
+        height: calc(100vh - (3.5rem + 1px));
+    }
+    .layout-fixed.text-sm .wrapper .sidebar {
+        height: calc(100vh - (2.93725rem + 1px));
+    }
+}
+@supports (-webkit-touch-callout: none) {
+    .layout-fixed .main-sidebar {
+        height: inherit;
+    }
+}
+.callout {
+    border-radius: 0.25rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    background-color: #fff;
+    border-left: 5px solid #e9ecef;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+    padding: 1rem;
+}
+.callout a {
+    color: #495057;
+    text-decoration: underline;
+}
+.callout a:hover {
+    color: #e9ecef;
+}
+.callout p:last-child {
+    margin-bottom: 0;
+}
+.callout.callout-danger {
+    border-left-color: #bd2130;
+}
+.callout.callout-warning {
+    border-left-color: #d39e00;
+}
+.callout.callout-info {
+    border-left-color: #117a8b;
+}
+.callout.callout-success {
+    border-left-color: #1e7e34;
+}
+.dark-mode .callout {
+    background-color: #3f474e;
+}
+.dark-mode .callout.callout-danger {
+    border-left-color: #ed7669;
+}
+.dark-mode .callout.callout-warning {
+    border-left-color: #f5b043;
+}
+.dark-mode .callout.callout-info {
+    border-left-color: #5faee3;
+}
+.dark-mode .callout.callout-success {
+    border-left-color: #00efb2;
+}
+.callout p {
+    font-weight: 350;
+    font-size: 0.9rem;
 }

@@ -26,7 +26,7 @@ class Pembayaran extends Model
         'jumlah_bayar',
     ];
 
-    public function getTanggalAttribute($value)
+    public function getTanggalBayarAttribute($value)
     {
         return Carbon::parse($value)->format('d-m-Y');
     }

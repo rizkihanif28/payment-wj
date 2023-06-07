@@ -31,7 +31,7 @@
                 <hr>
             @endrole
 
-            @role('admin')
+            @role('admin|petugas')
                 {{-- Start Manajemen Data --}}
                 <li class="menu-header">Manajemen Data</li>
                 <li class="nav-item dropdown">
@@ -62,12 +62,13 @@
                 <li class="menu-header">Pembayaran</li>
                 <li class="nav-item dropdown">
                     <a href="{{ route('pembayaran.index') }}"
-                        class="nav-link {{ Request::segment(2) == 'pembayaran' ? 'active' : '' }}"><i
-                            class="far fa-user"></i>
+                        class="nav-link {{ Request::segment(2) == 'index' ? 'active' : '' }}"><i class="far fa-user"></i>
                         <span>Pembayaran</span></a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link"><i class="far fa-user"></i>
+                    <a href="{{ route('pembayaran.status') }}"
+                        class="nav-link {{ Request::segment(2) == 'status' ? 'active' : '' }}">
+                        <i class="far fa-user"></i>
                         <span>Status Pembayaran</span></a>
                 </li>
                 <li class="nav-item dropdown">

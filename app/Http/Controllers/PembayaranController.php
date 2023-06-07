@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
 use NumberFormatter;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Contracts\DataTable;
 
 class PembayaranController extends Controller
 {
@@ -106,11 +107,36 @@ class PembayaranController extends Controller
                 ->with('success', 'Transaksi berhasil disimpan!');
         } else {
             return back()
-                ->with('error', 'Siswa dengan Nama: ' . $request->nama_siswa . 'Nisn : ' .
-                    $request->nisn . ' Sudah membayar Spp di bulan yang di input (' .
-                    implode($pembayaran,) . ")" . ' , Di tahun :  ' . $request->tahun_bayar . ' , Pembayaran dibatalkan');
+                ->with('error', 'Siswa Dengan Nama : ' . $request->nama_siswa . ' , NISN : ' .
+                    $request->nisn . ' Sudah Membayar Spp di bulan (' .
+                    implode($pembayaran,) . ")" . ' , di Tahun : ' . $request->tahun_bayar . ' , Pembayaran Dibatalkan');
         }
     }
+
+    public function statusPembayaran(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Siswa::with(['kelas'])->latest()->get();
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $btn = '<div class="row"><a href="' . route('pembayaran.status-pembayaran.detail', $row->nisn) . '"class="btn btn-primary btn-sm ml-2">
+                <i class="fas fa-money-check"></i> DETAIL
+                </a>';
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+        return view('pembayaran/status-pembayaran');
+    }
+    public function statusPembayaranShow()
+    {
+        $periode = Periode::all();
+        $siswa = Siswa::all()->first();
+        return view('pembayaran/status-pembayaranDetail', compact('siswa', 'periode'));
+    }
+
 
     /**
      * Display the specified resource.
@@ -118,7 +144,7 @@ class PembayaranController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function bayarHistory(Request $request)
+    public function historyPembayaran(Request $request)
     {
         if ($request->ajax()) {
             $data = Pembayaran::with(['petugas', 'siswa' => function ($query) {
