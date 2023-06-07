@@ -4203,7 +4203,7 @@ body:not(.sidebar-mini)
 .callout {
     border-radius: 0.25rem;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    background-color: #fff;
+    /* background-color: #fff; */
     border-left: 5px solid #e9ecef;
     margin-bottom: 1rem;
     margin-top: 2rem;
@@ -4224,9 +4224,11 @@ body:not(.sidebar-mini)
 }
 .callout.callout-warning {
     border-left-color: #d39e00;
+    /* background-color: rgb(255, 231, 153); */
 }
 .callout.callout-info {
     border-left-color: #117a8b;
+    /* background-color: #b6d8ff; */
 }
 .callout.callout-success {
     border-left-color: #1e7e34;
@@ -4250,3 +4252,5 @@ body:not(.sidebar-mini)
     font-weight: 350;
     font-size: 0.9rem;
 }
+
+

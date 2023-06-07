@@ -1,0 +1,85 @@
+@extends('layouts.master')
+@section('title', 'Status Pembayaran List')
+
+@push('css')
+    {{-- DataTables --}}
+    <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+@endpush
+
+@section('content')
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Status Pembayaran : {{ $siswa->nama_siswa }}</h5>
+                </div>
+                {{-- card header --}}
+                <div class="card-body">
+                    @if ($pembayaran->count() > 0)
+                        <table id="dataTable2" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Bulan</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (Universe::bulanAll() as $key => $item)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item['nama_bulan'] }}</td>
+                                        <td>
+                                            @if (Universe::statusPembayaran($siswa->id, $periode->tahun, $item['nama_bulan']) == 'LUNAS')
+                                                <a href="javascript:(0)" class="btn btn-success btn-sm"><i
+                                                        class=""></i>
+                                                    {{ Universe::statusPembayaran($siswa->id, $periode->tahun, $item['nama_bulan']) }}
+                                                </a>
+                                            @else
+                                                <a href="javascript:(0)" class="btn btn-danger btn-sm"><i
+                                                        class=""></i>
+                                                    {{ Universe::statusPembayaran($siswa->id, $periode->tahun, $item['nama_bulan']) }}
+                                                </a>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    @else
+                        <div class="alert alert-danger" role="alert">
+                            <h4 class="alert-heading">Data Status Pembayaran Tidak Tersedia!</h4>
+                            <p>Status Pembayaran Spp {{ $siswa->nama_siswa }} di Tahun {{ $periode->tahun }} tidak tersedia
+                            </p>
+                        </div>
+                    @endif
+                </div>
+            </div>
+            {{-- card --}}
+        </div>
+        {{-- col --}}
+    </div>
+    {{-- row --}}
+@endsection
+
+@push('customJS')
+    {{-- Plugin & Datatables  --}}
+    <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#dataTable2').DataTable({
+                "pagging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            })
+        })
+    </script>
+@endpush

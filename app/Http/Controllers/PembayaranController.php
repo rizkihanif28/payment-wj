@@ -130,11 +130,24 @@ class PembayaranController extends Controller
         }
         return view('pembayaran/status-pembayaran');
     }
-    public function statusPembayaranShow()
+    public function statusPembayaranDetail()
     {
         $periode = Periode::all();
         $siswa = Siswa::all()->first();
         return view('pembayaran/status-pembayaranDetail', compact('siswa', 'periode'));
+    }
+
+    public function statusPembayaranList()
+    {
+        $siswa = Siswa::all()->first();
+        $periode = Periode::all()->first();
+
+        $pembayaran = Pembayaran::with(['siswa'])
+            ->where('siswa_id', $siswa->id)
+            ->where('tahun_bayar', $periode->tahun)
+            ->get();
+
+        return view('pembayaran/status-pembayaranList', compact('siswa', 'periode', 'pembayaran'));
     }
 
 

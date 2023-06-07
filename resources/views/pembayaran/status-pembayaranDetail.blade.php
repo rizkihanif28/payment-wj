@@ -23,14 +23,33 @@
             </div>
         </div>
         <div class="col-lg-6">
-            <div class="card">
+            <div class="card" style="margin-top: 30px;">
                 <div class="card-header">
-                    <a href="javascript:void(0)" class="btn btn-primary btn-sm">
+                    <a href="javascript:void(0)" class="btn btn-primary btn-sm periode-spp">
                         <i class="fas fa-circle fa-fw"></i> PILIH TAHUN
                     </a>
+                    <a href="{{ route('pembayaran.status') }}" class="btn btn-danger btn-sm">
+                        <i class="fas fa-window-close fa-fw"></i> BACK TO LIST
+                    </a>
+                </div>
+                <div class="card-body">
+                    <div class="list-group">
+                        @foreach ($periode as $item)
+                            @if ($item->tahun == date('Y'))
+                                <a href="{{ route('pembayaran.status-pembayaran.list', [$siswa->nisn, $item->tahun]) }}"
+                                    class="list-group-item list-group-item-action active">
+                                    {{ $item->tahun }}
+                                </a>
+                            @else
+                                <a href="{{ route('pembayaran.status-pembayaran.list', [$siswa->nisn, $item->tahun]) }}"
+                                    class="list-group-item list-group-item-action ">
+                                    {{ $item->tahun }}
+                                </a>
+                            @endif
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
 @endsection

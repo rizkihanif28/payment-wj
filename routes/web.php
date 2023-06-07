@@ -40,8 +40,9 @@ Route::prefix('pembayaran')->middleware(['auth', 'role:admin|petugas'])->group(f
     Route::get('spp/{tahun}', [PembayaranController::class, 'periode'])->name('pembayaran.spp');
     Route::post('post/{nisn}', [PembayaranController::class, 'bayarValidate'])->name('pembayaran.post');
     Route::get('status', [PembayaranController::class, 'statusPembayaran'])->name('pembayaran.status');
+    Route::get('status/detail/{nisn}', [PembayaranController::class, 'statusPembayaranDetail'])->name('pembayaran.status-pembayaran.detail');
+    Route::get('status/{tahun}', [PembayaranController::class, 'statusPembayaranList'])->name('pembayaran.status-pembayaran.list');
     Route::get('history-pembayaran', [PembayaranController::class, 'historyPembayaran'])->name('pembayaran.history-pembayaran');
-    Route::get('status/detail/{nisn}', [PembayaranController::class, 'statusPembayaranShow'])->name('pembayaran.status-pembayaran.detail');
 });
 
 Route::prefix('admin')

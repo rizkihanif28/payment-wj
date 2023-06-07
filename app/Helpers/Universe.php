@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Models\Pembayaran;
 use App\Models\Petugas;
 use App\Models\Siswa;
 use Illuminate\Support\Facades\Auth;
@@ -34,5 +35,20 @@ class Universe
             ['nama_bulan' => 'Desember', 'kode_bulan' => '12'],
 
         ]);
+    }
+
+    // cek status pembayaran -> admin dan petugas
+    public function statusPembayaran($siswa_id, $tahun, $bulan)
+    {
+        $pembayaran = Pembayaran::where('siswa_id', $siswa_id)
+            ->where('tahun_bayar', $tahun)
+            ->oldest()
+            ->pluck('bulan_bayar')->toArray();
+
+        foreach ($pembayaran as $key => $bayar) {
+            if ($bayar == $bulan) {
+                return "LUNAS";
+            }
+        }
     }
 }
