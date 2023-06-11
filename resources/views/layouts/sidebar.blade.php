@@ -78,7 +78,8 @@
                         <span>Histori Pembayaran</span></a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link"><i class="far fa-user"></i>
+                    <a href="{{ route('pembayaran.laporan') }}"
+                        class="nav-link {{ Request::segment(2) == 'laporan' ? 'active' : '' }}"><i class="far fa-user"></i>
                         <span>Laporan Pembayaran</span></a>
                 </li>
                 {{-- End Pembayaran --}}

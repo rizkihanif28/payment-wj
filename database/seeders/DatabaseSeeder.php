@@ -139,7 +139,7 @@ class DatabaseSeeder extends Seeder
             'nominal' => 300000,
         ]);
         Periode::create([
-            'tahun' => '2020',
+            'tahun' => '2022',
             'nominal' => 300000
         ]);
         Periode::create([

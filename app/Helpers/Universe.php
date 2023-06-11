@@ -50,5 +50,6 @@ class Universe
                 return "LUNAS";
             }
         }
+        return "BELUM LUNAS";
     }
 }

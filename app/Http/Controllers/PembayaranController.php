@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\PembayaranDataTable;
+use App\Models\Kelas;
 use App\Models\Pembayaran;
 use App\Models\Periode;
 use App\Models\Petugas;
@@ -11,9 +13,9 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use NumberFormatter;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
-use Yajra\DataTables\Contracts\DataTable;
 
 class PembayaranController extends Controller
 {
@@ -72,7 +74,7 @@ class PembayaranController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function bayarValidate(Request $request, $nisn)
+    public function bayarValidate(Request $request)
     {
         $request->validate([
             'jumlah_bayar' => 'required',
@@ -130,26 +132,28 @@ class PembayaranController extends Controller
         }
         return view('pembayaran/status-pembayaran');
     }
-    public function statusPembayaranDetail()
+    public function statusPembayaranDetail(Siswa $siswa)
     {
         $periode = Periode::all();
-        $siswa = Siswa::all()->first();
         return view('pembayaran/status-pembayaranDetail', compact('siswa', 'periode'));
     }
 
-    public function statusPembayaranList()
+    public function statusPembayaranList($nisn, $tahun)
     {
-        $siswa = Siswa::all()->first();
-        $periode = Periode::all()->first();
+        $siswa = Siswa::where('nisn', $nisn)
+            ->first();
+
+        $periode = Periode::where('tahun', $tahun)
+            ->first();
 
         $pembayaran = Pembayaran::with(['siswa'])
             ->where('siswa_id', $siswa->id)
             ->where('tahun_bayar', $periode->tahun)
             ->get();
 
+
         return view('pembayaran/status-pembayaranList', compact('siswa', 'periode', 'pembayaran'));
     }
-
 
     /**
      * Display the specified resource.
@@ -184,9 +188,9 @@ class PembayaranController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function laporan()
     {
-        //
+        return view('pembayaran/laporan');
     }
 
     /**
@@ -196,9 +200,30 @@ class PembayaranController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function printLaporan(Request $request)
     {
-        //
+        $tanggal = $request->validate([
+            'tanggal_mulai' => 'required',
+            'tanggal_selesai' => 'required',
+        ]);
+
+        $data['pembayaran'] = Pembayaran::with(['petugas', 'siswa'])
+            ->whereBetween('tanggal_bayar', $tanggal)->get();
+
+        if ($data['pembayaran']->count() > 0) {
+            $pdf = FacadePdf::loadView('pembayaran/laporan-print-preview', $data);
+            return $pdf->download('pembayaran/laporan-print-preview' .
+                Carbon::parse(request()->tanggal_mulai)->format('d-m-Y') . '-' .
+                Carbon::parse(request()->tanggal_selesai)->format('d-m-Y') .
+                Str::of('Spp-WJ') . '.pdf');
+        } else {
+            return back()->with(
+                'error',
+                'Data pembayaran spp tanggal ' .
+                    Carbon::parse(request()->tanggal_mulai)->format('d-m-Y') . 'sampai dengan ' .
+                    Carbon::parse(request()->tanggal_selesai)->format('d-m-Y') . ' tidak tersedia'
+            );
+        }
     }
 
     /**
@@ -209,6 +234,10 @@ class PembayaranController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Pembayaran::findOrFail($id)->delete();
+
+        return response()->json([
+            'message' => 'Data permbayaran berhasil dihapus!',
+        ]);
     }
 }

@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\UserPermissionController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PembayaranController;
+use App\Models\Pembayaran;
 use App\Models\Petugas;
 use Illuminate\Support\Facades\Route;
 
@@ -40,9 +41,12 @@ Route::prefix('pembayaran')->middleware(['auth', 'role:admin|petugas'])->group(f
     Route::get('spp/{tahun}', [PembayaranController::class, 'periode'])->name('pembayaran.spp');
     Route::post('post/{nisn}', [PembayaranController::class, 'bayarValidate'])->name('pembayaran.post');
     Route::get('status', [PembayaranController::class, 'statusPembayaran'])->name('pembayaran.status');
-    Route::get('status/detail/{nisn}', [PembayaranController::class, 'statusPembayaranDetail'])->name('pembayaran.status-pembayaran.detail');
-    Route::get('status/{tahun}', [PembayaranController::class, 'statusPembayaranList'])->name('pembayaran.status-pembayaran.list');
+    Route::get('status/detail/{siswa:nisn}', [PembayaranController::class, 'statusPembayaranDetail'])->name('pembayaran.status-pembayaran.detail');
+    Route::get('status/{nisn}/{tahun}', [PembayaranController::class, 'statusPembayaranList'])->name('pembayaran.status-pembayaran.list');
     Route::get('history-pembayaran', [PembayaranController::class, 'historyPembayaran'])->name('pembayaran.history-pembayaran');
+    Route::get('laporan', [PembayaranController::class, 'laporan'])->name('pembayaran.laporan');
+    Route::post('print-laporan', [PembayaranController::class, 'printLaporan'])->name('pembayaran.print-laporan');
+    Route::delete('delete/{id}', [PembayaranController::class, 'destroy'])->name('pembayaran.delete');
 });
 
 Route::prefix('admin')
