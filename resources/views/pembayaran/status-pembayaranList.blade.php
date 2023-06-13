@@ -121,9 +121,7 @@
 
     <script>
         $(document).ready(function() {
-
-
-            Data Table 2
+            // Data Table 2
             $('#dataTable2').DataTable({
                 "pagging": true,
                 "lengthChange": true,

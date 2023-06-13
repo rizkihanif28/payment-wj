@@ -1,6 +1,6 @@
 <script type="text/javascript">
     $(function() {
-        var table = $("#dataTable2").DataTable({
+        const table = $("#dataTable2").DataTable({
             processing: true,
             serverSide: true,
             "responsive": true,
@@ -68,7 +68,7 @@
 
     // edit kelas
     $("body").on("click", ".btn-edit", function() {
-        var id = $(this).attr("id");
+        const id = $(this).attr("id");
         $.ajax({
             url: "/admin/kelas/" + id + "/edit",
             type: "GET",
@@ -93,7 +93,7 @@
     // action update
     $("#update").on("submit", function(e) {
         e.preventDefault()
-        var id = $("#id_edit").val()
+        const id = $("#id_edit").val()
         $.ajax({
             url: "/admin/kelas/" + id + "/update",
             type: "POST",
@@ -125,7 +125,7 @@
 
     // action delete
     $("body").on("click", ".btn-delete", function() {
-        var id = $(this).attr("id");
+        const id = $(this).attr("id");
         Swal.fire({
             title: 'Yakin hapus data ini?',
             icon: "warning",

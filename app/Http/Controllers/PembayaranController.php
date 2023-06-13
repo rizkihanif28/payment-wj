@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\PembayaranDataTable;
-use App\Models\Kelas;
 use App\Models\Pembayaran;
 use App\Models\Periode;
 use App\Models\Petugas;
@@ -12,7 +11,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use NumberFormatter;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
@@ -142,7 +140,6 @@ class PembayaranController extends Controller
     {
         $siswa = Siswa::where('nisn', $nisn)
             ->first();
-
         $periode = Periode::where('tahun', $tahun)
             ->first();
 
@@ -171,7 +168,7 @@ class PembayaranController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $btn = '<div class="print"><a href="' . route('pembayaran.history-pembayaran', $row->id) .
+                    $btn = '<div class="print"><a href="' . route('pembayaran.history.print', $row->id) .
                         '"class="btn btn-primary btn-sm"> <i class="fas fa-print fa-fw"></i>
                         </a>';
                     return $btn;
@@ -188,6 +185,16 @@ class PembayaranController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function PrintHistoryPembayaran($id)
+    {
+        $data['pembayaran'] = Pembayaran::with(['petugas', 'siswa'])
+            ->where('id', $id)
+            ->first();
+
+        $pdf = FacadePdf::loadView('pembayaran/history-print-preview', $data);
+        return $pdf->stream();
+    }
+
     public function laporan()
     {
         return view('pembayaran/laporan');
@@ -224,20 +231,5 @@ class PembayaranController extends Controller
                     Carbon::parse(request()->tanggal_selesai)->format('d-m-Y') . ' tidak tersedia'
             );
         }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        Pembayaran::findOrFail($id)->delete();
-
-        return response()->json([
-            'message' => 'Data permbayaran berhasil dihapus!',
-        ]);
     }
 }

@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\KelasController;
+use App\Http\Controllers\Admin\ManajemenPembayaranController;
+use App\Http\Controllers\Admin\PembayaranController as AdminPembayaranController;
 use App\Http\Controllers\Admin\PeriodeController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\PetugasController;
@@ -44,6 +46,7 @@ Route::prefix('pembayaran')->middleware(['auth', 'role:admin|petugas'])->group(f
     Route::get('status/detail/{siswa:nisn}', [PembayaranController::class, 'statusPembayaranDetail'])->name('pembayaran.status-pembayaran.detail');
     Route::get('status/{nisn}/{tahun}', [PembayaranController::class, 'statusPembayaranList'])->name('pembayaran.status-pembayaran.list');
     Route::get('history-pembayaran', [PembayaranController::class, 'historyPembayaran'])->name('pembayaran.history-pembayaran');
+    Route::get('history-print/preview/{id}', [PembayaranController::class, 'printHistoryPembayaran'])->name('pembayaran.history.print');
     Route::get('laporan', [PembayaranController::class, 'laporan'])->name('pembayaran.laporan');
     Route::post('print-laporan', [PembayaranController::class, 'printLaporan'])->name('pembayaran.print-laporan');
     Route::delete('delete/{id}', [PembayaranController::class, 'destroy'])->name('pembayaran.delete');
@@ -107,8 +110,9 @@ Route::prefix('admin')
             Route::get('periode/{id}/edit', [PeriodeController::class, 'edit'])->name('periode.edit');
             Route::post('periode/{id}/update', [PeriodeController::class, 'update'])->name('periode.update');
             Route::delete('periode/{id}/delete', [PeriodeController::class, 'destroy'])->name('periode.delete');
-            // Pembayaran
-            // Route::get('pembayaran', [PembayaranController::class, 'index'])->name('pembayaran.index');
+            // Manajemen Pembayaran
+            Route::get('manajemen/pembayaran', [ManajemenPembayaranController::class, 'index'])->name('pembayaran.manajemen');
+            Route::delete('pembayaran/{id}/delete', [ManajemenPembayaranController::class, 'destroy'])->name('pembayaran.manajemen.delete');
         });
     });
 

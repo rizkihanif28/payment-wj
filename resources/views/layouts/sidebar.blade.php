@@ -35,7 +35,9 @@
                 {{-- Start Manajemen Data --}}
                 <li class="menu-header">Manajemen Data</li>
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link"><i class="far fa-file-alt"></i>
+                    <a href="{{ route('pembayaran.manajemen') }}"
+                        class="nav-link {{ Request::segment(2) == 'manajemen' ? 'active' : '' }}"><i
+                            class="far fa-file-alt"></i>
                         <span>Pembayaran</span>
                     </a>
                 </li>
