@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\UserPermissionController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\ProfileController;
 use App\Models\Pembayaran;
 use App\Models\Petugas;
 use Illuminate\Support\Facades\Route;
@@ -115,5 +116,9 @@ Route::prefix('admin')
             Route::delete('pembayaran/{id}/delete', [ManajemenPembayaranController::class, 'destroy'])->name('pembayaran.manajemen.delete');
         });
     });
+Route::prefix('profile')->name('profile.')->middleware(['auth'])->group(function () {
+    Route::get('/', [ProfileController::class, 'index'])->name('index');
+    Route::patch('/', [ProfileController::class, 'update'])->name('update');
+});
 
 require __DIR__ . '/auth.php';
