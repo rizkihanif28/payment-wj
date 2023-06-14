@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
@@ -10,8 +14,30 @@ class ProfileController extends Controller
     {
         return view('profile');
     }
-    public function update()
+    public function update(Request $request)
     {
-        # code...
+        $validator = Validator::make($request->all(), [
+            'old_password' => 'required',
+            'new_password' => 'required|min:5'
+        ], [
+            'old_password.required' => 'Password sekarang harus diisi!',
+            'new_password.required' => 'Password baru harus diisi!',
+            'new_password.min' => 'Password baru hari berisi minimal 5 karakter!'
+        ]);
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+        if (!Hash::check($request->new_password, Auth::user()->password)) {
+            if (Hash::check($request->old_password, Auth::user()->password)) {
+                User::findOrFail(Auth::user()->id)->update([
+                    'password' => Hash::make($request->new_password),
+                ]);
+                return redirect()->route('profile.index')->with('success', 'Password anda berhasil diubah!');
+            } else {
+                return back()->with('error', 'Password sekarang salah!');
+            }
+        } else {
+            return back()->with('error', 'Password baru tidak boleh sama dengan password sekarang');
+        }
     }
 }

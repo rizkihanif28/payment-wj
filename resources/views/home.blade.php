@@ -7,13 +7,14 @@
         <div class="col-lg">
             <div class="jumbotron bg-info mt-5">
                 @role('admin|petugas')
-                    <h1 class=" display-4">Hello, {{ Universe::petugas()->nama_petugas }}!</h1>
+                    <h1 class=" home-user">Hello, {{ Universe::petugas()->nama_petugas }}!</h1>
                 @endrole
                 @role('siswa')
-                    <h1 class=" display-4">Hello, {{ Universe::siswa()->nama_siswa }}!</h1>
+                    <h1 class="home-user">Hello, {{ Universe::siswa()->nama_siswa }}!</h1>
                 @endrole
                 <p class="lead">Selamat Datang Di Web SPP Walang Jaya</p>
                 <hr class="my-4">
+                <p class="lead text-center mb-0">Silahkan pilih menu untuk memulai aktifitas</p>
             </div>
         </div>
     </div>

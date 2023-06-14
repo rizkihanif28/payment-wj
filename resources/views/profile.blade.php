@@ -2,13 +2,12 @@
 @section('title', 'Profile')
 
 @section('content')
-    <x-alert></x-alert>
     @role('admin|petugas')
         <div class="row">
             <div class="col-lg">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Profil</h5>
+                        <h5>Profile</h5>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -54,6 +53,7 @@
         </div>
     @endrole
 
+    <x-alert></x-alert>
     <div class="row">
         <div class="col-lg-5">
             <div class="card">
@@ -94,7 +94,7 @@
         <div class="col-lg-7">
             <div class="callout callout-danger">
                 <h5>Pemberitahuan!</h5>
-                <p>Password default / Password bawaan dari WEB SPP-WJ adalah : <b>password</p>
+                <p>Password sekarang tidak boleh sama dengan password baru</p>
             </div>
         </div>
     </div>

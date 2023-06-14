@@ -206,6 +206,28 @@ a:not(.btn-social-icon):not(.btn-social):not(.page-link) .fab {
         line-height: 30px;
     }
 }
+.home-user {
+    line-height: 34px;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: 400;
+}
+
+@media (max-width: 575.98px) {
+    .home-user {
+        font-size: 2rem;
+        line-height: 30px;
+        font-weight: 500;
+    }
+}
+.jumbotron {
+    padding: 2rem 2rem;
+}
+@media (max-width: 575.98px) {
+    .jumbotron {
+        padding: 2rem 2rem;
+    }
+}
 
 h1,
 h2,
@@ -4010,7 +4032,12 @@ body.layout-3 .main-footer {
     float: left;
 }
 .main-footer .footer-right {
-    float: right;
+    text-align: right;
+}
+@media (max-width: 575.98px) {
+    .main-footer .footer-right {
+        text-align: center;
+    }
 }
 
 .simple-footer {
@@ -4251,9 +4278,4 @@ body:not(.sidebar-mini)
 .callout p {
     font-weight: 350;
     font-size: 0.9rem;
-}
-
-/* 6.3 */
-/* Print Laporan PDF */
-.data-laporan {
 }
