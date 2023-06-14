@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Status Pembayaran List')
+@section('title', 'Status Pembayaran Siswa')
 
 @push('css')
     {{-- DataTables --}}
@@ -14,7 +14,6 @@
             <h5>Periode / Tahun : {{ $periode->tahun }}</h5>
         </div>
     </div>
-
     <div class="row">
         <div class="col-12">
             <div class="card">

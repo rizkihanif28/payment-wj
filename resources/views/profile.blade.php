@@ -52,6 +52,56 @@
             </div>
         </div>
     @endrole
+    @role('siswa')
+        <div class="row">
+            <div class="col-lg">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Profile</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="">Nama Siswa</label>
+                                    <input type="" name="" value="{{ Universe::siswa()->nama_siswa }}" readonly
+                                        id="" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="">NIS</label>
+                                    <input type="" name="" value="{{ Universe::siswa()->nis }}" readonly
+                                        id="" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="">NISN</label>
+                                    <input type="" name="" value="{{ Universe::siswa()->nisn }}" readonly
+                                        id="" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="">Username</label>
+                                    <input type="" name="" value="{{ Auth::user()->username }}" readonly
+                                        id="" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="">Email</label>
+                                    <input type="" name="" value="{{ Auth::user()->email }}" readonly
+                                        id="" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endrole
 
     <x-alert></x-alert>
     <div class="row">

@@ -24,11 +24,18 @@
                 <hr>
             @endrole
 
-            @role('petugas|siswa')
-                <li><a href="{{ route('home') }}" class="nav-link {{ Request::segment(1) == 'home' ? 'active' : '' }}">
+            @role('siswa')
+                <li><a href="{{ route('home') }}" class="nav-link {{ Request::segment(2) == 'home' ? 'active' : '' }}">
                         <i class="fas fa-home"></i> <span>Home</span></a>
                 </li>
-                <hr>
+                <li><a href="{{ route('siswa.history-pembayaran') }}"
+                        class="nav-link {{ Request::segment(2) == 'history-pembayaran' ? 'active' : '' }}">
+                        <i class="fas fa-home"></i> <span>History Pembayaran</span></a>
+                </li>
+                <li><a href="{{ route('siswa.status-pembayaran.detail') }}"
+                        class="nav-link {{ Request::segment(2) == 'status-pembayaran' ? 'active' : '' }}">
+                        <i class="fas fa-home"></i> <span>Status Pembayaran</span></a>
+                </li>
             @endrole
 
             @role('admin|petugas')

@@ -219,10 +219,10 @@ class PembayaranController extends Controller
 
         if ($data['pembayaran']->count() > 0) {
             $pdf = FacadePdf::loadView('pembayaran/laporan-print-preview', $data);
-            return $pdf->download('pembayaran/laporan-print-preview' .
+            return $pdf->download('SPP-WJ ' .
                 Carbon::parse(request()->tanggal_mulai)->format('d-m-Y') . '-' .
                 Carbon::parse(request()->tanggal_selesai)->format('d-m-Y') .
-                Str::of('Spp-WJ') . '.pdf');
+                '.pdf');
         } else {
             return back()->with(
                 'error',

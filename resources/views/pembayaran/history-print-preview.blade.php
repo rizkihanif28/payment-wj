@@ -10,7 +10,9 @@
 
 <body>
     <br><br>
-    <h2 class="laporan-title" style="font-family:sans-serif;">Laporan Pembayaran Spp Walang Jaya</h2>
+    <center>
+        <h2 class="laporan-title" style="font-family:sans-serif;">Laporan Pembayaran Spp Walang Jaya</h2>
+    </center>
     <br>
     <div style="float: left">
         <b style="font-family: sans-serif;">Nama Siswa : {{ $pembayaran->siswa->nama_siswa }}</b><br>
@@ -19,7 +21,7 @@
         <b style="font-family: sans-serif;">Nis : {{ $pembayaran->siswa->nis }}</b><br>
     </div>
     <br><br><br>
-    <table class="table table-striped table-bordered">
+    <table style="" border="1" cellspacing="0" cellpadding="10" width="100%">
         <thead>
             <tr>
                 <th scope="col" style="font-family: sans-serif;">Petugas</th>

@@ -30,12 +30,10 @@
                                 <th>Bulan</th>
                                 <th>Tahun</th>
                                 <th>Nominal</th>
-                                <th>Print</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -69,7 +67,7 @@
                 processing: true,
                 serverSide: true,
                 "responsive": true,
-                ajax: "{{ route('pembayaran.history-pembayaran') }}",
+                ajax: "{{ route('history-pembayaran.index') }}",
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'id'
@@ -101,12 +99,6 @@
                     {
                         data: 'jumlah_bayar',
                         name: 'jumlah_bayar'
-                    },
-                    {
-                        data: 'action',
-                        name: 'action',
-                        orderable: false,
-                        searchable: true
                     },
                 ]
             });

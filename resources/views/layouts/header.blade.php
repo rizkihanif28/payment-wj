@@ -15,18 +15,11 @@
                 <a href="{{ route('profile.index') }}" class="dropdown-item has-icon">
                     <i class="far fa-user"></i> Profile
                 </a>
-                {{-- <a href="features-activities.html" class="dropdown-item has-icon">
-                    <i class="fas fa-bolt"></i> Activities
-                </a> --}}
                 <a href="features-settings.html" class="dropdown-item has-icon disabled">
                     <i class="fas fa-cog"></i> Settings
                 </a>
                 <div class="dropdown-divider"></div>
-                {{-- <a href="{{ route('logout') }}" class="dropdown-item has-icon text-danger">
-                    <i class="fas fa-sign-out-alt"></i> Logout
-                </a> --}}
                 <form method="POST" action="{{ route('logout') }}">
-                    {{-- <button type="button" class="btn btn-default mr-2" data-dismiss="modal">Close</button> --}}
                     @csrf
                     <button type="submit" class="dropdown-item text-danger" style="font-size: 15px"><i
                             class="fas fa-sign-out-alt mr-2"></i>Logout</button>
