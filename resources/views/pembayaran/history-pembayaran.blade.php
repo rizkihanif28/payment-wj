@@ -14,7 +14,6 @@
             <div class="card">
                 <div class="card-header">
                     <h5>History Pembayaran</h5>
-                    <hr>
                 </div>
                 {{-- card header --}}
 
@@ -67,7 +66,7 @@
                 processing: true,
                 serverSide: true,
                 "responsive": true,
-                ajax: "{{ route('history-pembayaran.index') }}",
+                ajax: "{{ route('pembayaran.history-pembayaran') }}",
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'id'

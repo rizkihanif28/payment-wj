@@ -24,8 +24,7 @@
                                 <th>Nama Siswa</th>
                                 <th>Nisn</th>
                                 <th>Kelas</th>
-                                <th>Tanggal</th>
-                                <th>Petugas</th>
+                                <th>Tanggal Bayar</th>
                                 <th>Bulan</th>
                                 <th>Tahun</th>
                                 <th>Nominal</th>
@@ -34,7 +33,6 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -88,10 +86,6 @@
                     {
                         data: 'tanggal_bayar',
                         name: 'tanggal_bayar'
-                    },
-                    {
-                        data: 'petugas.nama_petugas',
-                        name: 'petugas.nama_petugas'
                     },
                     {
                         data: 'bulan_bayar',

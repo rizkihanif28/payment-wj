@@ -13,6 +13,7 @@
     <x-alert></x-alert>
     <div class="row">
         <div class="col-12">
+            <h4 class="mb-3">Permission List</h4>
             <div class="card">
                 <div class="card-header">
                     <a href="javascript:void(0)" class="btn btn-primary btn-sm" data-toggle="modal"

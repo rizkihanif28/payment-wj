@@ -29,7 +29,7 @@
                         <i class="fas fa-circle fa-fw"></i> PILIH TAHUN
                     </a>
                     <a href="{{ route('pembayaran.status') }}" class="btn btn-danger btn-sm">
-                        <i class="fas fa-window-close fa-fw"></i> BACK TO LIST
+                        <i class="fas fa-arrow-left"></i> BACK TO LIST
                     </a>
                 </div>
                 <div class="card-body">

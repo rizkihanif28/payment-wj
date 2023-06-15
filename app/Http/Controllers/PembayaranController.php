@@ -121,7 +121,7 @@ class PembayaranController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $btn = '<div class="row"><a href="' . route('pembayaran.status-pembayaran.detail', $row->nisn) . '"class="btn btn-primary btn-sm ml-2">
-                <i class="fas fa-money-check"></i> DETAIL
+                    <i class="fas fa-info-circle"></i> DETAIL
                 </a>';
                     return $btn;
                 })

@@ -39,12 +39,13 @@
                     <div class="list-group">
                         @foreach ($periode as $item)
                             @if ($item->tahun == date('Y'))
-                                <a href="{{ route('siswa.status-bulan') }}"
+                                <a href="{{ route('siswa.status-bulan', [$item->tahun]) }}"
                                     class="list-group-item list-group-item-action active">
                                     {{ $item->tahun }}
                                 </a>
                             @else
-                                <a href="{{ route('siswa.status-bulan') }}" class="list-group-item list-group-item-action">
+                                <a href="{{ route('siswa.status-bulan', [$item->tahun]) }}"
+                                    class="list-group-item list-group-item-action">
                                     {{ $item->tahun }}
                                 </a>
                             @endif

@@ -7,9 +7,6 @@ use App\Models\Periode;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Yajra\DataTables\Facades\DataTables;
-
-// use Yajra\DataTables\DataTables;
 
 class SiswaController extends Controller
 {
@@ -28,22 +25,25 @@ class SiswaController extends Controller
 
     public function statusPembayaranDetail()
     {
-        $siswa = Siswa::all()->first();
         $periode = Periode::all();
 
-        return view('siswa/status-pembayaranDetail', compact('siswa', 'periode'));
+        $siswa = Siswa::where('user_id', Auth::user()->id)->first();
+
+        return view('siswa/status-pembayaranDetail', compact('periode', 'siswa'));
     }
 
     public function statusPembayaranBulan($tahun)
     {
-        $siswa = Siswa::where('user_id', Auth::user()->id)->first();
-
         $periode = Periode::where('tahun', $tahun)
+            ->first();
+
+        $siswa = Siswa::where('user_id', Auth::user()->id)
             ->first();
 
         $pembayaran = Pembayaran::with(['siswa'])
             ->where('siswa_id', $siswa->id)
             ->where('tahun_bayar', $periode->tahun)
+            ->oldest()
             ->get();
 
         return view('siswa/status-pembayaran-bulan', compact('siswa', 'periode', 'pembayaran'));

@@ -12,6 +12,7 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
+                <h4 class="mb-3">Role Permission</h4>
                 <div class="card-header">
                     <a href="javascript:void(0)" class="btn btn-primary btn-sm">
                         <i class="fas fa-user-tie fa-fw"></i> Role List

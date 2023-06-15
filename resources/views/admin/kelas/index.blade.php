@@ -13,6 +13,7 @@
     <x-alert></x-alert>
     <div class="row">
         <div class="col-12">
+            <h4 class="mb-3">Data Kelas</h4>
             <div class="card">
                 <div class="card-header">
                     @can('create-kelas')

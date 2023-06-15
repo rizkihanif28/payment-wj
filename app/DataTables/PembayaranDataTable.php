@@ -16,7 +16,7 @@ class PembayaranDataTable
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
                 $btn = '<div class="row"><a href="javascript:void(0)" id="' . $row->id .
-                    '" class="btn btn-danger btn-sm ml-2 btn-delete">
+                    '" class="btn btn-danger btn-sm ml-3 btn-delete">
                     <i class="fas fa-trash fa-fw"></i>
                     </a>';
                 return $btn;

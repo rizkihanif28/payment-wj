@@ -16,6 +16,7 @@
     <x-alert></x-alert>
     <div class="row">
         <div class="col-12">
+            <h4 class="mb-3">Data Users</h4>
             <div class="card">
                 {{-- card-header  --}}
                 <div class="card-body">

@@ -3944,11 +3944,13 @@ body.layout-3 .main-footer {
 }
 .main-sidebar .sidebar-menu li a i {
     width: 28px;
+    font-size: 1.2rem;
     margin-right: 20px;
     text-align: center;
 }
 .main-sidebar .sidebar-menu li a span {
     margin-top: 3px;
+    font-size: 0.9rem;
     width: 100%;
 }
 .main-sidebar .sidebar-menu li a:hover {
