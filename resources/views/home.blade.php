@@ -5,7 +5,7 @@
 @section('content')
     <div class="row">
         <div class="col-lg">
-            <div class="jumbotron bg-info mt-5">
+            <div class="jumbotron bg-info" style="margin-top: 5rem">
                 @role('admin|petugas')
                     <h1 class=" home-user">Hello, {{ Universe::petugas()->nama_petugas }}!</h1>
                 @endrole

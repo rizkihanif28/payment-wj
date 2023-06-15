@@ -26,7 +26,7 @@
 
             {{-- Siswa --}}
             @role('siswa')
-                <li><a href="{{ route('home') }}" class="nav-link {{ Request::segment(2) == 'home' ? 'active' : '' }}">
+                <li><a href="{{ route('home') }}" class="nav-link {{ Request::segment(1) == 'home' ? 'active' : '' }}">
                         <i class="fas fa-home"></i> <span>Home</span></a>
                 </li>
                 <li><a href="{{ route('siswa.history-pembayaran') }}"
