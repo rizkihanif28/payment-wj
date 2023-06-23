@@ -201,7 +201,7 @@ class DatabaseSeeder extends Seeder
 
         $user1 = User::create([
             'username' => 'admin123',
-            'email' => 'admin@gmail.com',
+            'email' => 'qikcup@gmail.com',
             'password' => Hash::make('password')
         ]);
         $user1->assignRole('admin');
@@ -212,7 +212,7 @@ class DatabaseSeeder extends Seeder
             'nip' => '00111',
             'nama_petugas' => 'Administrator',
             'jenis_kelamin' => 'Laki-Laki',
-            'email' => 'admin@gmail.com'
+            'email' => 'rizkihnf2@gmail.'
         ]);
 
         $user2 = User::create([

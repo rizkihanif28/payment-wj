@@ -14,7 +14,7 @@
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <!-- CSS Libraries -->
-    {{-- <link rel="stylesheet" href="../node_modules/bootstrap-social/bootstrap-social.css"> --}}
+    <link rel="stylesheet" href="../node_modules/bootstrap-social/bootstrap-social.css">
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="../assets/css/style.css">
@@ -62,26 +62,26 @@
                                         <input id="login" type="text" class="form-control" name="login"
                                             required autofocus>
                                     </div>
-
-                                    <div class="form-group">
-                                        <label for="password" class="control-label">Password</label>
-                                        <input id="password" type="password" class="form-control" name="password"
-                                            required>
-                                    </div>
                                     <div class="d-block">
                                         <div class="float-right">
-                                            <a href="auth-forgot-password.html" class="text-small">
+                                            <a href="{{ route('password.request') }}" class="text-small">
                                                 Forgot Password?
                                             </a>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" name="remember" class="custom-control-input"
-                                                tabindex="3" id="remember-me">
-                                            <label class="custom-control-label" for="remember-me">Remember Me</label>
-                                        </div>
+                                        <label for="password" class="control-label">Password</label>
+                                        <input id="password" type="password" class="form-control" name="password"
+                                            required>
+                                    </div>
+                                    <div class="block mt-4 mb-3">
+                                        <label for="remember_me" class="inline-flex items-center">
+                                            <input id="remember_me" type="checkbox"
+                                                class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                                name="remember">
+                                            <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                                        </label>
                                     </div>
 
                                     <div class="form-group">
@@ -92,12 +92,6 @@
                                 </form>
                             </div>
                         </div>
-                        {{-- <div class="mt-5 text-muted text-center">
-                            Don't have an account? <a href="auth-register.html">Create One</a>
-                        </div>
-                        <div class="simple-footer">
-                            Copyright &copy; Stisla 2018
-                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -121,11 +115,6 @@
 <!-- JS Libraies -->
 
 <!-- Template JS File -->
-<script src="../assets/js/scripts.js"></script>
-<script src="../assets/js/custom.js"></script>
-
-</html>
-File -->
 <script src="../assets/js/scripts.js"></script>
 <script src="../assets/js/custom.js"></script>
 
