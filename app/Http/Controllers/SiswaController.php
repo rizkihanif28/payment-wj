@@ -48,4 +48,8 @@ class SiswaController extends Controller
 
         return view('siswa/status-pembayaran-bulan', compact('siswa', 'periode', 'pembayaran'));
     }
+
+    public function siswaBayar($tahun)
+    {
+    }
 }

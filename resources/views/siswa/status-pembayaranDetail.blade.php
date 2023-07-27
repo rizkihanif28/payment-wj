@@ -31,7 +31,8 @@
         <div class="col-lg-6">
             <div class="card" style="margin-top: 30px;">
                 <div class="card-header">
-                    <a href="javascript:void(0)" class="btn btn-primary btn-sm periode-spp">
+                    <h5>Status Pembayaran</h5>
+                    <a href="javascript:void(0)" class="btn btn-primary btn-sm periode-spp mt-3">
                         <i class="fas fa-circle fa-fw"></i> PILIH TAHUN
                     </a>
                 </div>
@@ -50,6 +51,12 @@
                                 </a>
                             @endif
                         @endforeach
+                    </div>
+                    <div class="botton payment-gateway text-center">
+                        <h5 class="payment-gateway mt-4" style="font-size:15px">Untuk bayar spp <span
+                                style="color: #001eff">silahkan klik tombol di
+                                bawah ini</span></h5>
+                        <a class="btn btn-success mt-2" href="#">Bayar SPP</a>
                     </div>
                 </div>
             </div>

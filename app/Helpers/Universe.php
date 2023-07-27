@@ -18,7 +18,7 @@ class Universe
     {
         return Siswa::where('user_id', Auth::user()->id)->first();
     }
-    public function bulanAll()
+    public static function bulanAll()
     {
         return collect([
             ['nama_bulan' => 'Januari', 'kode_bulan' => '01'],
@@ -38,7 +38,7 @@ class Universe
     }
 
     // cek status pembayaran -> admin dan petugas
-    public function statusPembayaran($siswa_id, $tahun, $bulan)
+    public static function statusPembayaran($siswa_id, $tahun, $bulan)
     {
         $pembayaran = Pembayaran::where('siswa_id', $siswa_id)
             ->where('tahun_bayar', $tahun)

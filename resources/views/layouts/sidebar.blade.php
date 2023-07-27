@@ -37,6 +37,10 @@
                         class="nav-link {{ Request::segment(2) == 'status-pembayaran' ? 'active' : '' }}">
                         <i class="fas fa-bell"></i> <span>Status Pembayaran</span></a>
                 </li>
+                <li><a href="{{ route('siswa.payment-gateway') }}"
+                        class="nav-link {{ Request::segment(2) == 'payment-gateway' ? 'active' : '' }}">
+                        <i class="fas fa-bell"></i> <span>Pembayaran</span></a>
+                </li>
             @endrole
 
             @role('petugas')
