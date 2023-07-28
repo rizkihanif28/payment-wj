@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Pembayaran;
 use App\Models\Periode;
+use App\Models\Petugas;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class SiswaController extends Controller
 {
@@ -49,7 +53,60 @@ class SiswaController extends Controller
         return view('siswa/status-pembayaran-bulan', compact('siswa', 'periode', 'pembayaran'));
     }
 
-    public function siswaBayar($tahun)
+    public function formBayarSiswa($nisn)
     {
+        $siswa = Siswa::with(['kelas'])
+            ->first();
+        $periode = Periode::all();
+
+        return view('siswa/formBayar', compact('siswa', 'periode'));
+    }
+
+    public function siswaBayarPeriode($tahun)
+    {
+        $periode = Periode::where('tahun', $tahun)->first();
+        return response()->json([
+            'data' => $periode,
+            'nominal_rupiah' => 'Rp ' . number_format($periode->nominal, 0, 2, '.'),
+
+        ]);
+    }
+
+    public function siswaBayarValidate(Request $request)
+    {
+        $request->validate([
+            'jumlah_bayar' => 'required',
+        ], [
+            'jumlah_bayar.required' => 'Jumlah bayar tidak boleh kosong!'
+        ]);
+
+        $pembayaran = Pembayaran::whereIn('bulan_bayar', $request->bulan_bayar)
+            ->where('tahun_bayar', $request->tahun_bayar)
+            ->where('siswa_id', $request->siswa_id)
+            ->pluck('bulan_bayar')
+            ->toArray();
+
+        if (!$pembayaran) {
+            DB::transaction(function () use ($request) {
+                foreach ($request->bulan_bayar as $bulan) {
+                    Pembayaran::create([
+                        'kode_pembayaran' => 'SPPWJ-' . Str::upper(Str::random(5)),
+                        'siswa_id' => $request->siswa_id,
+                        'nisn' => $request->nisn,
+                        'tanggal_bayar' => Carbon::now('Asia/Jakarta'),
+                        'tahun_bayar' => $request->tahun_bayar,
+                        'bulan_bayar' => $bulan,
+                        'jumlah_bayar' => $request->jumlah_bayar
+                    ]);
+                }
+            });
+            return redirect()->route('siswa.history-pembayaran')
+                ->with('success', 'Transaksi berhasil disimpan!');
+        } else {
+            return back()
+                ->with('error', 'Siswa Dengan Nama : ' . $request->nama_siswa . ' , NISN : ' .
+                    $request->nisn . ' Sudah Membayar Spp di bulan (' .
+                    implode($pembayaran,) . ")" . ' , di Tahun : ' . $request->tahun_bayar . ' , Pembayaran Dibatalkan');
+        }
     }
 }

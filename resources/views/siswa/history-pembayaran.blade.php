@@ -8,6 +8,7 @@
 @endpush
 
 @section('content')
+    <x-alert></x-alert>
     <div class="row">
         <div class="col-12">
             <div class="card">

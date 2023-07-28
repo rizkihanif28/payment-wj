@@ -14,6 +14,15 @@
 
     <div class="row">
         <div class="col-lg-6">
+            <div class="callout callout-warning">
+                <h5 class="payment-gateway" style="font-size:15px">Untuk pembayaran spp <span style="color: #001eff">silahkan
+                        klik tombol di
+                        bawah ini</span></h5>
+                <a class="btn btn-primary mt-2" href="{{ route('siswa.formBayar', $siswa->nisn) }}"
+                    style="color: #ffff; text-decoration:none">Bayar SPP</a>
+                <a class="btn btn-success mt-2 ml-5" href="#"
+                    style="color: #ffff; text-decoration:none; box-shadow:none">Cek Pembayaran</a>
+            </div>
             <div class="callout callout-info">
                 <h5>Info Siswa</h5>
                 <p>
@@ -51,12 +60,6 @@
                                 </a>
                             @endif
                         @endforeach
-                    </div>
-                    <div class="botton payment-gateway text-center">
-                        <h5 class="payment-gateway mt-4" style="font-size:15px">Untuk bayar spp <span
-                                style="color: #001eff">silahkan klik tombol di
-                                bawah ini</span></h5>
-                        <a class="btn btn-success mt-2" href="#">Bayar SPP</a>
                     </div>
                 </div>
             </div>
