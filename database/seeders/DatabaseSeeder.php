@@ -134,15 +134,15 @@ class DatabaseSeeder extends Seeder
         ]);
 
         //seed periode
-        Periode::create([
+        $periode1 = Periode::create([
             'tahun' => '2021',
             'nominal' => 300000,
         ]);
-        Periode::create([
+        $periode2 = Periode::create([
             'tahun' => '2022',
             'nominal' => 300000
         ]);
-        Periode::create([
+        $periode3 = Periode::create([
             'tahun' => '2023',
             'nominal' => 400000
         ]);

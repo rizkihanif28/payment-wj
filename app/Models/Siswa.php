@@ -48,9 +48,4 @@ class Siswa extends Model
     {
         return $this->belongsTo(Petugas::class);
     }
-
-    public function periode()
-    {
-        return $this->belongsTo(Periode::class);
-    }
 }

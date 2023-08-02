@@ -159,7 +159,7 @@
                     url: '/pembayaran/spp/' + tahun,
                     method: "GET",
                     success: function(response) {
-                        $("#nominal_spp_label").html(`Nominal Spp Tahun ` + tahun + ':')
+                        $("#nominal_spp_label").html(`Spp ` + tahun + '')
                         $("#nominal").val(response.nominal_rupiah)
                         $("#jumlah_bayar").val(response.data.nominal)
                     }

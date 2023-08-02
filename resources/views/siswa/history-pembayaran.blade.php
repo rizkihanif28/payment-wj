@@ -22,9 +22,7 @@
                                 <th>No</th>
                                 <th>Nama Siswa</th>
                                 <th>Kelas</th>
-                                <th>Nisn</th>
                                 <th>Tanggal Bayar</th>
-                                {{-- <th>Nama Petugas</th> --}}
                                 <th>Bulan</th>
                                 <th>Tahun</th>
                                 <th>Nominal</th>
@@ -36,9 +34,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->siswa->nama_siswa }}</td>
                                     <td>{{ $item->siswa->kelas->nama_kelas }}</td>
-                                    <td>{{ $item->nisn }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($item->tanggal_bayar)->format('d-m-Y') }}</td>
-                                    {{-- <td>{{ $item->petugas->nama_petugas }}</td> --}}
+                                    <td>{{ $item->tanggal_bayar }}</td>
                                     <td>{{ $item->bulan_bayar }}</td>
                                     <td>{{ $item->tahun_bayar }}</td>
                                     <td>{{ $item->jumlah_bayar }}</td>

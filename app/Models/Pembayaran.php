@@ -16,10 +16,10 @@ class Pembayaran extends Model
     protected $table = 'pembayarans';
 
     protected $fillable = [
-        'kode_pembayaran',
-        'petugas_id',
+        'user_id',
         'siswa_id',
-        'nisn',
+        'kode_pembayaran',
+        'status',
         'tanggal_bayar',
         'bulan_bayar',
         'tahun_bayar',
@@ -41,13 +41,8 @@ class Pembayaran extends Model
         return $this->belongsTo(Siswa::class);
     }
 
-    public function petugas()
+    public function user()
     {
-        return $this->belongsTo(Petugas::class);
-    }
-
-    public function periode()
-    {
-        return $this->belongsTo(Periode::class);
+        return $this->belongsTo(User::class);
     }
 }

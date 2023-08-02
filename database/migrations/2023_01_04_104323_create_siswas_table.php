@@ -17,6 +17,7 @@ class CreateSiswasTable extends Migration
 
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('kelas_id')->nullable()->constrained('kelas')->onUpdate('cascade')->onDelete('cascade');
             $table->string('kode_siswa')->nullable();
             $table->string('nisn')->nullable();
             $table->string('nis')->nullable();
@@ -25,7 +26,6 @@ class CreateSiswasTable extends Migration
             $table->string('email')->unique();
             $table->string('alamat')->nullable();
             $table->string('telepon')->nullable();
-            $table->foreignId('kelas_id')->nullable()->constrained('kelas')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

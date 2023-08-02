@@ -5,6 +5,7 @@ namespace App\Helpers;
 use App\Models\Pembayaran;
 use App\Models\Petugas;
 use App\Models\Siswa;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -13,6 +14,10 @@ class Universe
     public static function petugas()
     {
         return Petugas::where('user_id', Auth::user()->id)->first();
+    }
+    public static function user()
+    {
+        return User::where('username', Auth::user()->username)->first();
     }
     public static function siswa()
     {

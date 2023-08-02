@@ -8,20 +8,15 @@
 @endpush
 
 @section('content')
-    <div class="col-12">
-        <h5> Pembayaran SPP : {{ $siswa->nama_siswa }} </h5>
-    </div>
-
     <div class="row">
         <div class="col-lg-6">
             <div class="callout callout-warning">
-                <h5 class="payment-gateway" style="font-size:15px">Untuk pembayaran spp <span style="color: #001eff">silahkan
+                <h5 class="payment-gateway" style="font-size:15px">Untuk melakukan pembayaran spp <span
+                        style="color: #001eff">silahkan
                         klik tombol di
                         bawah ini</span></h5>
                 <a class="btn btn-primary mt-2" href="{{ route('siswa.formBayar', $siswa->nisn) }}"
                     style="color: #ffff; text-decoration:none">Bayar SPP</a>
-                <a class="btn btn-success mt-2 ml-5" href="#"
-                    style="color: #ffff; text-decoration:none; box-shadow:none">Cek Pembayaran</a>
             </div>
             <div class="callout callout-info">
                 <h5>Info Siswa</h5>

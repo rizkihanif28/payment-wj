@@ -7,6 +7,7 @@ use App\Models\Pembayaran;
 use App\Models\Periode;
 use App\Models\Petugas;
 use App\Models\Siswa;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -74,44 +75,46 @@ class PembayaranController extends Controller
      */
     public function bayarValidate(Request $request)
     {
+        DB::beginTransaction();
+
         $request->validate([
             'jumlah_bayar' => 'required',
         ], [
             'jumlah_bayar.required' => 'Jumlah bayar tidak boleh kosong!'
         ]);
 
-        $petugas = Petugas::where('user_id', Auth::user()->id)->first();
-
+        $user = User::where('id', Auth::user()->id)->first();
         $pembayaran = Pembayaran::whereIn('bulan_bayar', $request->bulan_bayar)
             ->where('tahun_bayar', $request->tahun_bayar)
             ->where('siswa_id', $request->siswa_id)
             ->pluck('bulan_bayar')
             ->toArray();
 
+        // membuat pembayaran
         if (!$pembayaran) {
-            DB::transaction(function () use ($request, $petugas) {
-                foreach ($request->bulan_bayar as $bulan) {
-                    Pembayaran::create([
-                        'kode_pembayaran' => 'SPPWJ-' . Str::upper(Str::random(5)),
-                        'petugas_id' => $petugas->id,
-                        'siswa_id' => $request->siswa_id,
-                        'nisn' => $request->nisn,
-                        'tanggal_bayar' => Carbon::now('Asia/Jakarta'),
-                        'tahun_bayar' => $request->tahun_bayar,
-                        'bulan_bayar' => $bulan,
-                        'jumlah_bayar' => $request->jumlah_bayar
-                    ]);
-                }
-            });
+            foreach ($request->bulan_bayar as $bulan) {
+                Pembayaran::create([
+                    'user_id' => $user->id,
+                    'siswa_id' => $request->siswa_id,
+                    'kode_pembayaran' => 'SPPWJ-' . Str::upper(Str::random(5)),
+                    'status' => 'paid',
+                    'tanggal_bayar' => Carbon::now('Asia/Jakarta'),
+                    'bulan_bayar' => $bulan,
+                    'tahun_bayar' => $request->tahun_bayar,
+                    'jumlah_bayar' => $request->jumlah_bayar,
+                ]);
+            }
+            DB::commit();
             return redirect()->route('pembayaran.history-pembayaran')
                 ->with('success', 'Transaksi berhasil disimpan!');
         } else {
+            DB::rollBack();
             return back()
-                ->with('error', 'Siswa Dengan Nama : ' . $request->nama_siswa . ' , NISN : ' .
-                    $request->nisn . ' Sudah Membayar Spp di bulan (' .
-                    implode($pembayaran,) . ")" . ' , di Tahun : ' . $request->tahun_bayar . ' , Pembayaran Dibatalkan');
+                ->with('error', 'Siswa Dengan Nama : ' . $request->nama_siswa . ' Sudah Membayar Spp di bulan (' .
+                    implode($pembayaran,) . ")" . ' , Tahun : ' . $request->tahun_bayar . ' , Pembayaran Dibatalkan');
         }
     }
+
 
     public function statusPembayaran(Request $request)
     {
@@ -161,7 +164,7 @@ class PembayaranController extends Controller
     public function historyPembayaran(Request $request)
     {
         if ($request->ajax()) {
-            $data = Pembayaran::with(['petugas', 'siswa' => function ($query) {
+            $data = Pembayaran::with(['user', 'siswa' => function ($query) {
                 $query->with('kelas');
             }])->latest()->get();
 

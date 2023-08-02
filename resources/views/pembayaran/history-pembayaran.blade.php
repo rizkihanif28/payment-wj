@@ -22,10 +22,10 @@
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>User</th>
                                 <th>Nama Siswa</th>
                                 <th>Kelas</th>
                                 <th>Tanggal Bayar</th>
-                                <th>Petugas</th>
                                 <th>Bulan</th>
                                 <th>Tahun</th>
                                 <th>Nominal</th>
@@ -72,6 +72,10 @@
                         name: 'id'
                     },
                     {
+                        data: 'user.username',
+                        name: 'user.username'
+                    },
+                    {
                         data: 'siswa.nama_siswa',
                         name: 'siswa.nama_siswa'
                     },
@@ -82,10 +86,6 @@
                     {
                         data: 'tanggal_bayar',
                         name: 'tanggal_bayar'
-                    },
-                    {
-                        data: 'petugas.nama_petugas',
-                        name: 'petugas.nama_petugas'
                     },
                     {
                         data: 'bulan_bayar',

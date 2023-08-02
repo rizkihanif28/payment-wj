@@ -128,7 +128,6 @@ Route::prefix('siswa')->middleware(['auth', 'role:siswa'])->group(function () {
     Route::get('/status/pembayaran/{tahun}', [ControllersSiswaController::class, 'statusPembayaranBulan'])->name('siswa.status-bulan');
     Route::get('/formBayar/{nisn}', [ControllersSiswaController::class, 'formBayarSiswa'])->name('siswa.formBayar');
     Route::get('/pembayaran/{tahun}', [ControllersSiswaController::class, 'siswaBayarPeriode'])->name('siswa.bayar-periode');
-    // Route::get('/detail-transaksi', [ControllersSiswaController::class, 'detailTransaksi'])->name('siswa.detail-transaksi');
     Route::post('/pembayaran/{nisn}', [ControllersSiswaController::class, 'siswaBayarValidate'])->name('siswa.bayarValidate');
 });
 

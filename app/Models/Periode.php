@@ -14,14 +14,4 @@ class Periode extends Model
         'tahun',
         'nominal'
     ];
-
-    public function siswa()
-    {
-        return $this->hasMany(Siswa::class);
-    }
-
-    public function pembayaran()
-    {
-        return $this->hasMany(Pembayaran::class);
-    }
 }

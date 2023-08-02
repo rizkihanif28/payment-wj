@@ -15,14 +15,14 @@ class CreatePembayaransTable extends Migration
     {
         Schema::create('pembayarans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('petugas_id')->nullable()->constrained('petugas')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('siswa_id')->nullable()->constrained('siswas')->onUpdate('cascade')->onDelete('cascade');
             $table->string('kode_pembayaran');
-            $table->string('nisn')->nullable();
-            $table->string('tanggal_bayar')->nullable();
-            $table->string('bulan_bayar')->nullable();
-            $table->string('tahun_bayar')->nullable();
-            $table->string('jumlah_bayar')->nullable();
+            $table->string('status');
+            $table->string('tanggal_bayar');
+            $table->string('bulan_bayar');
+            $table->string('tahun_bayar');
+            $table->string('jumlah_bayar');
             $table->timestamps();
         });
     }
