@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\DataTables\SiswaDataTable;
+use Spatie\Activitylog\Models\Activity;
 
 class SiswaController extends Controller
 {
@@ -142,5 +143,14 @@ class SiswaController extends Controller
         $siswa->delete();
 
         return response()->json(['message' => 'Berhasil di hapus!']);
+    }
+
+    // log activity
+    public function log(Siswa $siswa)
+    {
+        return view('pembayaran.log', [
+            'logs' => Activity::where('subject_type', Siswa::class)
+                ->where('subject_id', $siswa->id)->latest()->get()
+        ]);
     }
 }

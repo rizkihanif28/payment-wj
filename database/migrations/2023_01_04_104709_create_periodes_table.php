@@ -15,8 +15,8 @@ class CreatePeriodesTable extends Migration
     {
         Schema::create('periodes', function (Blueprint $table) {
             $table->id();
-            $table->string('tahun');
-            $table->string('nominal');
+            $table->integer('tahun');
+            $table->integer('nominal');
             $table->timestamps();
         });
     }

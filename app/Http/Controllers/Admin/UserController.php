@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Spatie\Activitylog\Models\Activity;
 
 class UserController extends Controller
 {
@@ -36,10 +37,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, $activity)
     {
         $user = User::findOrFail($id);
         return response()->json(['data' => $user]);
+
+        $activity = Activity::all()->last();
     }
 
     /**
@@ -56,6 +59,7 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => $request->password ? $request->old_password : Hash::make($request->password)
         ]);
+        return Activity::all()->last();
     }
 
     /**

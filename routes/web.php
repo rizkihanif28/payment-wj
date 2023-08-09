@@ -43,7 +43,8 @@ Route::prefix('pembayaran')->middleware(['auth', 'role:admin|petugas'])->group(f
     Route::get('index', [PembayaranController::class, 'index'])->name('pembayaran.index');
     Route::get('form/{nisn}', [PembayaranController::class, 'formBayar'])->name('pembayaran.form');
     Route::get('spp/{tahun}', [PembayaranController::class, 'periode'])->name('pembayaran.spp');
-    Route::post('post/{nisn}', [PembayaranController::class, 'bayarValidate'])->name('pembayaran.post');
+    Route::post('post', [PembayaranController::class, 'bayarValidate'])->name('pembayaran.post');
+    Route::post('midtrans-callback', [PembayaranController::class, 'callback'])->name('midtrans.callback');
     Route::get('status', [PembayaranController::class, 'statusPembayaran'])->name('pembayaran.status');
     Route::get('status/detail/{siswa:nisn}', [PembayaranController::class, 'statusPembayaranDetail'])->name('pembayaran.status-pembayaran.detail');
     Route::get('status/{nisn}/{tahun}', [PembayaranController::class, 'statusPembayaranList'])->name('pembayaran.status-pembayaran.list');
@@ -52,6 +53,7 @@ Route::prefix('pembayaran')->middleware(['auth', 'role:admin|petugas'])->group(f
     Route::get('laporan', [PembayaranController::class, 'laporan'])->name('pembayaran.laporan');
     Route::post('print-laporan', [PembayaranController::class, 'printLaporan'])->name('pembayaran.print-laporan');
     Route::delete('delete/{id}', [PembayaranController::class, 'destroy'])->name('pembayaran.delete');
+    Route::get('pembayaran/activity/log', [PembayaranController::class, 'log'])->name('pembayaran.log');
 });
 
 Route::prefix('admin')
@@ -100,6 +102,8 @@ Route::prefix('admin')
             Route::get('siswa/{id}/edit', [SiswaController::class, 'edit'])->name('siswa.edit');
             Route::post('siswa/{id}/update', [SiswaController::class, 'update'])->name('siswa.update');
             Route::delete('siswa/{id}/delete', [SiswaController::class, 'destroy'])->name('siswa.delete');
+            // log activity siswa
+            Route::get('siswa/activity/log', [SiswaController::class, 'log'])->name('siswa.log');
             // Kelas
             Route::get('kelas', [KelasController::class, 'index'])->name('kelas.index');
             Route::post('kelas/store', [KelasController::class, 'store'])->name('kelas.store');

@@ -17,12 +17,12 @@ class CreatePembayaransTable extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('siswa_id')->nullable()->constrained('siswas')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('kode_pembayaran');
-            $table->string('status');
+            // $table->string('kode_pembayaran');
+            $table->enum('status', ['unpaid', 'paid']);
             $table->string('tanggal_bayar');
             $table->string('bulan_bayar');
             $table->string('tahun_bayar');
-            $table->string('jumlah_bayar');
+            $table->bigInteger('jumlah_bayar');
             $table->timestamps();
         });
     }

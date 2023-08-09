@@ -23,7 +23,7 @@
                 </div>
                 {{-- card header --}}
                 <div class="card-body">
-                    <form method="POST" action="{{ route('pembayaran.post', $siswa->nisn) }}">
+                    <form method="POST" action="{{ route('pembayaran.post') }}">
                         @csrf
                         <div class="row">
                             <div class="col-lg-3">
@@ -82,6 +82,21 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-lg-3 mb-3">
+                                <div class="form-group">
+                                    <label for="bulan_bayar">Bulan</label>
+                                    <select required="" name="bulan_bayar[]" id="bulan_bayar" class="select2 select2bs5">
+                                        <option disabled selected>-- PILIH BULAN --</option>
+                                        @foreach (Universe::bulanAll() as $bulan)
+                                            <option value="{{ $bulan['nama_bulan'] }}">{{ $bulan['nama_bulan'] }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('bulan_bayar')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label for="jumlah_bayar" id="nominal_spp_label">Nominal Spp</label>
@@ -93,25 +108,14 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-lg-3 mb-3">
-                                <div class="form-group">
-                                    <label for="bulan_bayar">Bulan</label>
-                                    <select required="" name="bulan_bayar[]" id="bulan_bayar" class="select2"
-                                        data-placeholder="-PILIH BULAN-" multiple="multiple">
-                                        @foreach (Universe::bulanAll() as $bulan)
-                                            <option value="{{ $bulan['nama_bulan'] }}">{{ $bulan['nama_bulan'] }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
+
+                            {{-- <div class="col-lg-3">
                                 <div class="form-group">
                                     <label for="total_bayar">Total Bayar</label>
                                     <input required type="" name="total_bayar" readonly id="total_bayar"
                                         class="form-control">
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary"><i class="fas fa-save fa-fw"></i>

@@ -9,10 +9,29 @@ use App\Models\Kelas;
 use App\Models\Pembayaran;
 use App\Models\Periode;
 use App\Models\Petugas;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Siswa extends Model
 {
-    use HasFactory;
+    use HasFactory, LogsActivity;
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly([
+                'user_id',
+                'kelas_id',
+                'nama_siswa',
+                'jenis_kelamin',
+                'email',
+                'alamat',
+                'telepon',
+            ])
+            ->setDescriptionForEvent(fn (string $eventName) => " successfully {$eventName}")
+            ->useLogName('Pembayaran');
+    }
 
     protected $table = 'siswas';
 
