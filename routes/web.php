@@ -43,7 +43,7 @@ Route::prefix('pembayaran')->middleware(['auth', 'role:admin|petugas'])->group(f
     Route::get('index', [PembayaranController::class, 'index'])->name('pembayaran.index');
     Route::get('form/{nisn}', [PembayaranController::class, 'formBayar'])->name('pembayaran.form');
     Route::get('spp/{tahun}', [PembayaranController::class, 'periode'])->name('pembayaran.spp');
-    Route::post('post', [PembayaranController::class, 'bayarValidate'])->name('pembayaran.post');
+    Route::post('pembayaran-detail', [PembayaranController::class, 'bayarValidate'])->name('pembayaran.post');
     Route::post('midtrans-callback', [PembayaranController::class, 'callback'])->name('midtrans.callback');
     Route::get('status', [PembayaranController::class, 'statusPembayaran'])->name('pembayaran.status');
     Route::get('status/detail/{siswa:nisn}', [PembayaranController::class, 'statusPembayaranDetail'])->name('pembayaran.status-pembayaran.detail');

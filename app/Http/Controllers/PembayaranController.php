@@ -85,17 +85,13 @@ class PembayaranController extends Controller
 
         $request->validate([
             'bulan_bayar' => 'required',
-            // 'jumlah_bayar' => 'required',
         ], [
-            // 'jumlah_bayar.required' => 'Jumlah bayar tidak boleh kosong!'
             'bulan_bayar.required' => 'Bulan bayar tidak boleh kosong!'
         ]);
-        $user = User::where('id', Auth::user()->id)->first();
 
         $kelas = Kelas::all()->first();
         $user = User::where('id', Auth::user()->id)->first();
         $siswa = Siswa::where('id', $request->siswa_id);
-
 
         foreach ($request->bulan_bayar as $bulan) {
             $pembayaran = Pembayaran::create([
@@ -133,12 +129,20 @@ class PembayaranController extends Controller
 
         DB::rollBack();
         return back()
-            ->with('error', 'Siswa Dengan Nama : ' . $request->nama_siswa . ' Sudah Membayar Spp di bulan ('
-                . implode($pembayaran) . ")" . ' , Tahun : ' . $request->tahun_bayar . ' , Pembayaran Dibatalkan');
+            ->with('error', 'Siswa Dengan Nama : ' . $request->nama_siswa . ' Sudah Membayar Spp di bulan tersebut'
+                . ' , Tahun : ' . $request->tahun_bayar . ' , Pembayaran Dibatalkan');
     }
 
     public function callback(Request $request)
     {
+        $serverKey = config('midtrans.serverKey');
+        $hashed = hash("sha512", $request->order_id . $request->status_code . $request->gross_amount . $serverKey);
+        if ($hashed == $request->signature_key) {
+            if ($request->transaction_status == 'capture') {
+                $pembayaran = Pembayaran::find($request->pembayaran_id);
+                $pembayaran->update(['status' => 'paid']);
+            }
+        }
     }
 
 
